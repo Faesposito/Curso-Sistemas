@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <title>Formulario con Metodo Get</title>
+</head>
+
+<body>
+   <form action="form_get_server.php" method="GET">
+
+      <table>
+
+         <tr>
+            <td>
+               <label>Nombre:</label>
+               <input type="text" name="name" />
+
+            </td>
+            <td>
+               <label>Apellidos:</label>
+               <input type="text" name="surname" />
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Correo Electronico:</label>
+               <input type="email" name="email" value="@" />
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Poblacion:</label>
+               <input type="text" name="population" />
+
+            </td>
+            <td>
+               <label>Provincia:</label>
+               <input type="text" name="province" />
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Edad:</label><br />
+
+               <label for="age1"><input type="radio" id="age1" name="age" value="0-20" />0-20</label><br />
+
+               <label for="age2"><input type="radio" id="age2" name="age" value="20-40" />20-40</label><br />
+
+               <label for="age3"><input type="radio" id="age3" name="age" value="40-60" />40-60</label><br />
+
+               <label for="age4"><input type="radio" id="age4" name="age" value="60-100" />60-100</label><br />
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Como nos Conociste?</label><br />
+
+               <input type="checkbox" id="recomendation1" name="recomendation1" value="Friend" />
+               <label for="recomendation1">A travez de un amigo.</label><br />
+
+               <input type="checkbox" id="recomendation2" name="recomendation2" value="Search" />
+               <label for="recomendation2">A travez de un buscador.</label><br />
+
+               <input type="checkbox" id="recomendation3" name="recomendation3" value="Browser" />
+               <label for="recomendation3">Navegando por la red</label><br />
+
+               <input type="checkbox" id="recomendation4" name="recomendation4" value="Other" />
+               <label for="recomendation4">Otros.</label><br />
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Opinion sobre nuestra pagina WEB:</label><br />
+               <textarea name="opinion" placeholder="Escribe..."></textarea>
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Tienes alguna sugerencia?</label><br />
+               <textarea name="sugerence" placeholder="Escribe tus Sugerencias..."></textarea>
+
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <label>Cuanto navegas por Internet? (señala la opcion mas aproximada))</label><br />
+
+               <select name="browserTime">
+                  <option value="2">2 horas al dia.</option>
+                  <option value="4">4 horas al dia.</option>
+               </select>
+
+            </td>
+         </tr>
+
+      </table>
+
+      <input type="submit" value="Send" />
+      <input type="reset" value="Reset" />
+
+   </form>
+</body>
+
+</html>

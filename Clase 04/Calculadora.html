@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Calculadora</title>
+
+   <style>
+      button {
+         background-color: rgb(0, 153, 255);
+      }
+
+      .operands {
+
+         background-color: rgb(9, 184, 24);
+      }
+
+      #equal {
+         background-color: yellowgreen;
+      }
+
+      #delete {
+         background-color: red;
+      }
+   </style>
+</head>
+
+<body>
+
+
+
+   <table>
+
+      <tr style="border: 1px;">
+         <td colspan="4">
+            <input type="text" value="0">
+         </td>
+      </tr>
+
+      <tr>
+         <td>
+            <button>7</button>
+         </td>
+         <td>
+            <button>8</button>
+         </td>
+         <td>
+            <button>9</button>
+         </td>
+         <td>
+            <button class="operands">+</button>
+         </td>
+      </tr>
+
+      <tr>
+         <td>
+            <button>4</button>
+         </td>
+         <td>
+            <button>5</button>
+         </td>
+         <td>
+            <button>6</button>
+         </td>
+         <td>
+            <button class="operands">-</button>
+         </td>
+      </tr>
+
+      <tr>
+         <td>
+            <button>3</button>
+         </td>
+         <td>
+            <button>2</button>
+         </td>
+         <td>
+            <button>1</button>
+         </td>
+         <td>
+            <button class="operands">*</button>
+         </td>
+      </tr>
+
+      <tr>
+         <td>
+            <button>0</button>
+         </td>
+         <td>
+            <button>.</button>
+         </td>
+         <td>
+            <button id="equal">=</button>
+         </td>
+         <td>
+            <button class="operands">/</button>
+         </td>
+      </tr>
+
+      <tr>
+         <td colspan="4">
+            <button id="delete">Borrar</button>
+         </td>
+      </tr>
+
+   </table>
+
+</body>
+
+</html>
