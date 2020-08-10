@@ -1,88 +1,85 @@
 label {
-    font-size: 1.2em;
-    font-weight: 200;
-    font-family: 'Franklin Gothic Medium';
-    color: #00bb92;
+  font-size: 1.2em;
+  font-weight: 200;
+  font-family: "Franklin Gothic Medium";
+  color: #00bb92;
 }
 
 ::placeholder {
-    font-size: 1.3em;
-    font-family: 'Franklin Gothic Medium';
-    color: lightgray;
+  font-size: 1.3em;
+  font-family: "Franklin Gothic Medium";
+  color: lightgray;
 }
 
 select {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 caption {
-    font-size: 2em;
-    font-weight: bold;
-    font-family: 'Franklin Gothic Medium';
-    opacity: 0.5;
-    border-bottom: 1.5px solid rgb(73, 72, 72, 0.5);
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium";
+  opacity: 0.5;
+  border-bottom: 1.5px solid rgb(73, 72, 72, 0.5);
 }
 
 .footer {
-
-    height: 20%;
-    border-top: 1.5px solid rgb(73, 72, 72, 0.5);
-    padding: 15px 25px 15px 20px;
+  height: 20%;
+  border-top: 1.5px solid rgb(73, 72, 72, 0.5);
+  padding: 15px 25px 15px 20px;
 }
 
 .income-label {
-    text-align: center;
-    display: block;
-    height: 30%;
-    width: 15%;
-    float: right;
-    clear: left;
-    padding: 3px 0px 3px 0px;
-    margin: 0px 20px 10px 0px;
-    background-color: #00bb92;
+  text-align: center;
+  display: block;
+  height: 30%;
+  width: 15%;
+  float: right;
+  clear: left;
+  padding: 3px 0px 3px 0px;
+  margin: 0px 20px 10px 0px;
+  background-color: #00bb92;
 }
 
 .create-button {
-
-    height: 50px;
-    width: 18%;
-    background-color: #00bb92;
+  height: 50px;
+  width: 18%;
+  background-color: #00bb92;
 }
 
 .otherSelectors {
-
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .slider {
-    -webkit-appearance: none;
-    width: 75%;
-    height: 6px;
-    border-radius: 5px;
-    border: solid 0.5px;
-    box-shadow: inset 1px 1px 1.1px 1.1px rgba(0, 0, 0, 0.4);
-    background: #b1aeae;
-    outline: none;
-    opacity: 0.5;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
+  -webkit-appearance: none;
+  width: 75%;
+  height: 6px;
+  border-radius: 5px;
+  border: solid 0.5px;
+  box-shadow: inset 1px 1px 1.1px 1.1px rgba(0, 0, 0, 0.4);
+  background: #b1aeae;
+  outline: none;
+  opacity: 0.5;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: solid 0.5px;
-    background: #f4f4f4;
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: solid 0.5px;
+  background: #f4f4f4;
+  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
 }
