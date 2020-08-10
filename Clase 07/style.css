@@ -3,11 +3,6 @@
 	padding: 7px 7px 7px 7px;
 }
 
-input[type="text"] {
-
-	font-size: 1em;
-}
-
 .buttonProperties {
 
 	cursor: pointer;
@@ -28,7 +23,7 @@ input[type="text"] {
 
 .display {
 
-	width: 96%;
+	width: 98%;
 	height: 32px;
 	text-align: right;
 	border: none;
@@ -41,7 +36,7 @@ input[type="text"] {
 
 	background-color: #d63814;
 
-	width: 97%;
+	width: 100%;
 
 	border-color: #b9503c;
 
@@ -52,7 +47,7 @@ input[type="text"] {
 
 	background-color: #851c04;
 	box-shadow: 0px 5px #571101;
-	color: yellow;
+
 }
 
 .red-button:active {
@@ -75,7 +70,7 @@ input[type="text"] {
 
 	background-color: #1737f0;
 	box-shadow: 0px 5px #1f34ac;
-	color: yellow;
+
 }
 
 .blue-button:active {
@@ -98,7 +93,7 @@ input[type="text"] {
 
 	background-color: #41721f;
 	box-shadow: 0px 5px #2e5214;
-	color: yellow;
+
 }
 
 .green-button:active {
@@ -121,7 +116,7 @@ input[type="text"] {
 
 	background-color: #9b8d12;
 	box-shadow: 0px 5px #885807;
-	color: yellow;
+
 }
 
 .yellow-button:active {

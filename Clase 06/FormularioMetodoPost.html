@@ -2,7 +2,12 @@
 <html>
 
 <head>
-   <meta charset="utf-8" />
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="style.css">
+
    <title>Formulario con Metodo Post</title>
 </head>
 
@@ -10,102 +15,126 @@
 
    <form action="form_post_server.php" method="POST">
 
-      <table>
-         <h1>Create Account</h1>
-         <tr>
-            <td>
-               <label>First Name *</label><br>
-               <input type="text" name="firstName" placeholder="enter your first name" required />
+      <table class="w3-container ">
 
-            </td>
-            <td>
-               <label>Last Name</label><br>
-               <input type="text" name="surname" placeholder="enter your last name" />
+         <thead>
+            <th>
+               <caption class="w3-light-grey">Create Account</caption>
+            </th>
+         </thead>
 
-            </td>
-         </tr>
+         <tbody>
+            <tr>
+               <td>
+                  <label> First Name *</label><br>
+                  <input class="w3-input w3-border w3-round" type="text" name="firstName"
+                     placeholder="enter your first name" required />
 
-         <tr>
-            <td>
-               <label>Email *</label><br>
-               <input type="email" name="email" placeholder="enter your email" required />
+               </td>
+               <td>
+                  <label>Last Name</label><br>
+                  <input class="w3-input w3-border w3-round" type="text" name="surname"
+                     placeholder="enter your last name" />
 
-            </td>
-         </tr>
+               </td>
+            </tr>
 
-         <tr>
-            <td>
-               <label>Password *</label><br>
-               <input type="password" name="password" placeholder="enter your password" required />
+            <tr>
+               <td colspan="2">
+                  <label>Email *</label><br>
+                  <input class="w3-input w3-border w3-round" type="email" name="email" placeholder="enter your email"
+                     required />
 
-            </td>
-            <td>
-               <label>Confirm Password *</label><br>
-               <input type="password" name="passwordConfirmation" placeholder="enter your password again" required />
+               </td>
+            </tr>
 
-            </td>
-         </tr>
+            <tr>
+               <td>
+                  <label>Password *</label><br>
+                  <input class="w3-input w3-border w3-round" type="password" name="password"
+                     placeholder="enter your password" required />
 
-         <tr>
-            <td>
-               <label>Gender</label>
-               <br />
-               <label for="gender1"><input type="radio" id="gender1" name="gender" value="Male" />Male</label>
-               <label for="gender2"><input type="radio" id="gender2" name="gender" value="Female" />Female</label>
+               </td>
+               <td>
+                  <label>Confirm Password *</label><br>
+                  <input class="w3-input w3-border w3-round" type="password" name="passwordConfirmation"
+                     placeholder="enter your password again" required />
 
-            </td>
-            <td>
-               <label>Hobbies</label><br />
-               <input type="checkbox" id="hobbies1" name="hobbies1" value="Music" />
-               <label for="hobbies1">Music</label>
-               <input type="checkbox" id="hobbies2" name="hobbies2" value="Sports" />
-               <label for="hobbies2">Sports</label>
-               <input type="checkbox" id="hobbies3" name="hobbies3" value="Travel" />
-               <label for="hobbies3">Travel</label>
-               <input type="checkbox" id="hobbies4" name="hobbies4" value="Movies" />
-               <label for="hobbies4">Movies</label>
+               </td>
+            </tr>
 
-            </td>
-         </tr>
+            <tr>
+               <td>
+                  <label>Gender</label><br />
+                  <label class="w3-text-grey otherSelectors" for="gender1">
+                     <input type="radio" id="gender1" name="gender" value="Male" />Male</label>
+                  <label class="w3-text-grey otherSelectors" for="gender2">
+                     <input type="radio" id="gender2" name="gender" value="Female" />Female</label>
 
-         <tr>
-            <td>
+               </td>
+               <td>
+                  <label>Hobbies</label><br />
+                  <input type="checkbox" id="hobbies1" name="hobbies1" value="Music" />
+                  <label class="w3-text-grey otherSelectors" for="hobbies1">Music</label>
+                  <input type="checkbox" id="hobbies2" name="hobbies2" value="Sports" />
+                  <label class="w3-text-grey otherSelectors" for="hobbies2">Sports</label>
+                  <input type="checkbox" id="hobbies3" name="hobbies3" value="Travel" />
+                  <label class="w3-text-grey otherSelectors" for="hobbies3">Travel</label>
+                  <input type="checkbox" id="hobbies4" name="hobbies4" value="Movies" />
+                  <label class="w3-text-grey otherSelectors" for="hobbies4">Movies</label>
 
-               <label for="sourceIncome">Source of Income</label><br />
-               <select name="sourceIncome" multiple size="1">
-                  <option value="Employed">Employed</option>
-                  <option value="Unemployed">Unemployed</option>
-               </select>
+               </td>
+            </tr>
 
-            </td>
-            <td>
-               <label for="income">Income</label><br>
-               <input type="range" name="income" id="income" min="0" max="100000" step="100" value="20000">
-               <label for="income">20k</label>
+            <tr>
+               <td>
+                  <label for="sourceIncome">Source of Income</label><br />
+                  <select class="w3-input w3-border w3-round" name="sourceIncome" multiple size="1">
+                     <option value="Employed">Employed</option>
+                     <option value="Unemployed">Unemployed</option>
+                  </select>
 
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <label for="file">Upload Profile Picture</label><br>
-               <input type="file" name="file" id="file" accept="image/*" multiple>
+               </td>
+               <td>
+                  <label for="income">Income</label><br>
+                  <input class="slider" type="range" name="income" id="income" min="0" max="100000" step="100"
+                     value="0">
+                  <label class="income-label w3-text-white w3-round" for="income">20k</label>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <label for="file">Upload Profile Picture</label><br>
+                  <input type="file" name="file" id="file" accept="image/*" multiple>
 
-            </td>
-            <td>
-               <label for="age">Age</label><br>
-               <input type="text" name="age" id="age" value="18">
+               </td>
+               <td>
+                  <label for="age">Age</label><br>
+                  <input class="w3-input w3-border w3-round" type="text" name="age" id="age" value="18">
 
-            </td>
-         </tr>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <label for="bio">Bio</label><br>
+                  <textarea name="bio" id="bio" cols="72" rows="5"></textarea><br>
+               </td>
+            </tr>
+         </tbody>
+
+         <thead>
+            <th colspan="2" class=" footer w3-light-grey">
+
+               <input class="create-button w3-text-white w3-right w3-border w3-round" type="submit" value="Create" />
+
+            </th>
+         </thead>
 
       </table>
 
-      <label for="bio">Bio</label><br>
-      <textarea name="bio" id="bio" cols="65" rows="5"></textarea><br>
-
-      <input type="submit" value="Create" />
 
    </form>
+
 </body>
 
 </html>
