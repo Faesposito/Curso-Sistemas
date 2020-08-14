@@ -1,0 +1,9 @@
+Hola Franco, tu trabajo está súper impecable.
+
+Honestamente no tengo nada para agregarte. Hacés muy buen uso de los atributos,
+lograste la apariencia estética idéntica. El complemento de refuerzo de CSS propio
+está muy bien armado. Delegaste toda la estilización al CSS sin dejar rastros
+de atributos de style, lo cual, excelente.
+
+¡Excelente!
+Felicitaciones.
