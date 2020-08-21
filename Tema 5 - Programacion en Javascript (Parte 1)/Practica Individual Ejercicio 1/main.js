@@ -1,4 +1,4 @@
-//Mi primer programa en JavaScript
+//Ejercicio 1
 
 let tabla = [{
     lacteo: "Leche",
