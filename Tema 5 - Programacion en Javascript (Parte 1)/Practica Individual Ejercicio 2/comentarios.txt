@@ -1,0 +1,10 @@
+Hola Franco,
+Muy bien tu código. Prolijo y modularizaste con funciones para cada dato solicitado.
+Nada que agregar!!
+
+PD: Tontera:
+
+let counter = 0;
+Vas incrementando el contador al iterar toda la estructura de datos.
+No está mal. Otra forma es:  let counter = WeatherTable.length;
+Y dentro del for, solo vas haciendo la suma.

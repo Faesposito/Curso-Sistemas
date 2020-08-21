@@ -1,0 +1,15 @@
+Hola Franco!!
+Tu resolución es la forma más acertada. Muy buena tu investigación, efectivamente está muy bien plantearlo así.
+De la otra manera tendrías que involucrarte a filtrar todas las palabras del string, con métodos de manipulación de cadenas,
+for's, y validaciones con if's. 
+
+Muy bueno lo del words.sort( new Intl.Collator('en').compare );
+
+Sobre tu consulta si vamos a expresiones regulares.
+Sí, vamos a ver como utilizarlas, que es más o menos lo que hiciste vos aquí.
+Armaremos algunas expresiones regulares básicas, otras directamente las buscaremos y las utilizaremos convenientemente.
+Sí, son complejas y algo crípticas de leer, hay repositorios en línea estilo enciclopedias de expresiones regulares
+para infinidad de cuestiones. A veces no es necesario quemarse la cabeza tanto escribiendo expresiones regulares, a menos
+que sean matcheos simples. Se suele tomar una de base y en todo caso modificarla. Pero lo vamos a ver en la unidad siguiente
+donde abordamos procesamiento de texto.
+
