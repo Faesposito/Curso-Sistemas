@@ -153,6 +153,7 @@ let AnualWeatherTable = {
 };
 
 function TableToHTML(table) {
+
 	let html = "";
 
 	html += '<h1>Parámetros climáticos</h1>';
@@ -162,6 +163,7 @@ function TableToHTML(table) {
 	//Codigo
 
 	let months = Object.keys(table);
+
 
 	html += '<tr>';
 	html += '<td>Meses </td>';
