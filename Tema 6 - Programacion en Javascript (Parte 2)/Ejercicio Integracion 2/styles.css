@@ -1,59 +1,38 @@
+body {
+	background-color: #fdfff4;
+}
+
 .wrapper {
-	display: grid;
-	grid-gap: 10px;
-	min-width: 30%;
-	max-width: 70%;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
+	background-color: #ebebeb;
+	min-width: 18em;
+	max-width: 54em;
+	height: auto;
+	display: flex;
 
+	margin: 2em;
+	flex-direction: colum;
+	flex-wrap: wrap;
+	align-content: space-around;
 }
 
-.grid1 {
-	grid-column: 1 / 1;
-	grid-row: row;
+.dolarBillboard {
+	width: 16em;
+	margin: 1em;
 }
 
-.grid2 {
-	grid-column: 2 / 2;
-	grid-row: row;
+.gridContainer thead,
+tbody,
+tr {
+	display: contents;
 }
 
-.grid3 {
-	grid-column: 3 / 3;
-	grid-row: row;
-}
-
-.grid4 {
-	grid-column: 1 / 1;
-	grid-row: row 2;
-}
-
-.grid5 {
-	grid-column: 2 / 2;
-	grid-row: row 2;
-}
-
-.grid6 {
-	grid-column: 3/3;
-	grid-row: row 2;
-}
-
-.containerTabble {
+.gridContainer {
 	display: grid;
 	border-collapse: collapse;
-	min-width: 100%;
-	max-width: 100%;
-
 	grid-template-rows: 32px 30px 30px 24px 15px;
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	text-transform: uppercase;
-}
-
-.containerTabble thead,
-tbody,
-tr {
-	display: contents;
 }
 
 .GridHeader {
@@ -129,6 +108,7 @@ img {
 }
 
 .tabbleVariation {
+	background-color: white;
 	color: #728176;
 	font-size: 100%;
 }
