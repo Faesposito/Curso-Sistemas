@@ -1,3 +1,6 @@
+let digits = [0, 0, 0, 0]
+
+
 function createCalculator() {
 
   let calculatorHTML =
@@ -134,10 +137,34 @@ function onButtonClick0() {
 
 }
 
+function onButtonClickequal() {
+
+  for (digit in digits) {
+    document.getElementById("display").value = document.getElementById("display").value + digits;
+  }
+
+}
+
 
 function onButtonClickplus() {
 
+  if (digits[0] === 0) {
+    digits1 = document.getElementById("display").value;
+    document.getElementById("display").value = document.getElementById("display").value + '+';
+  }
+
 }
+
+
+function onButtonClickdelete() {
+
+
+
+  document.getElementById("display").clear();
+
+
+}
+
 
 //Create Calculator
 
