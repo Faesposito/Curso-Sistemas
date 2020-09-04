@@ -1,0 +1,7 @@
+Muy bueno tu trabajo Franco!!!
+
+Sólo un detalle. El código HTML tiene que ser el resultado de la ejecución de una función de JavaScript.
+De manera que luego se incrustre en el body. No pasa nada, estás ahí nomás. El grueso del trabajo lo tenés hecho
+y te quedó excelente!!!
+
+Abrazo
