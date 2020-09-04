@@ -1,15 +1,52 @@
+@media screen and (min-width: 575px) {
+  .wrapper {
+    display: flex;
+    width: 50%;
+  }
+
+  .gridContainer {
+    width: 100%;
+  }
+}
+
 body {
   background-color: #fdfff4;
+  text-align: center;
+}
+
+button {
+  width: 53%;
+  border: none;
+  outline: none;
+  padding: 0.1em;
+  font-size: 2em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: rgb(100, 204, 100, 0.8);
+  color: white;
+
+}
+
+button:hover {
+  background: rgba(83, 167, 83, 0.8);
+  color: white;
+}
+
+button:active {
+  background: rgba(45, 87, 45, 0.8);
+  color: white;
 }
 
 .wrapper {
+
   background-color: #ebebeb;
   min-width: 18em;
   max-width: 54em;
   height: auto;
   display: flex;
 
-  margin: 2em;
+  margin: 5vh auto 0;
   flex-direction: colum;
   flex-wrap: wrap;
   align-content: space-around;
