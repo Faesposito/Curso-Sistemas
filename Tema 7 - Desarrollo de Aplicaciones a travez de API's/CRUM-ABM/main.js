@@ -19,6 +19,4 @@
 
 import {UserView} from './view.js';
 
-let view = new UserView('crud-user');
-
-view.attach('app');
+let view = new UserView('crud');

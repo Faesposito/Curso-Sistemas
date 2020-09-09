@@ -17,90 +17,137 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {UserModel} from './model.js';
+import {
+	UserModel
+} from './model.js';
 
-class UserView
-{
-	constructor( id )
-	{
+class UserView {
+
+	constructor(id) {
+
 		this.innerModel = new UserModel();
 		this.id = id;
 
-		this.innerModel.create({username:"718", name:"Ana", password:"a46546546547hK$"});
-		this.innerModel.create({username:"719", name:"Carolina", password:"a46546546547hK$"});
-
+		this.update();
 	}
 
-	generateHTML()
-	{
-		let html = 
-		`<div id="${this.id}">
-		<h1>CRUD Users</h1>
-		<table>
+	/* 	buttonPres() {
+
+			var buttons = document.getElementsByTagName("button");
+			var buttonsCount = buttons.length;
+			let id;
+
+			for (var i = 0; i <= buttonsCount; i += 1) {
+				buttons[i].click = function (e) {
+					id = this.id;
+
+				};
+			}
+
+			return id;
+		} */
+
+	update() {
+
+		let html =
+			`<h1>CRUD Users</h1>
+		<table id="CRUD-Tabble">
 		<tr>
 			<th>Username</th>
 			<th>Nombre de usuario</th>
 			<th>Contraseña</th>
-			<th>Acciones</th>
+			<th colspan = 2 >Acciones</th>
 		<tr>`;
 
-		for( let user of this.innerModel.getAll() )
-		{
-			html += 
-			`<tr>
+		for (let user of this.innerModel.getAll()) {
+			html +=
+				`<tr>
 				<td>${user.username}</td>
 				<td>${user.name}</td>
 				<td>${user.password}</td>
 				<td>
-					<button>Editar</button>
-					<button>Borrar</button>
+					<button id="${user.username}-editButton" class="editUser" >Editar</button>
+				</td>
+				<td>
+					<button id="${user.username}-deleteButton" class="deleteUser">Borrar</button>
 				</td>
 			<tr>`
 		}
 
 		html +=
-		`</table>
+			`</table>
 		<br>
-		<button id="${this.id}btnNewUser">Nuevo Usuario</button>
-		<button id="${this.id}btnTest">TestButton</button>
-		</div>`;
+		<button id="${this.id}btnNewUser" class="newUser">Nuevo Usuario</button>
+		<button id="${this.id}btnEditUser" class="editUser">Editar Usuario</button>
+		<button id="${this.id}btnDeleteUser" class="deleteUser">Borrar Usuario</button>`;
 
-		return html;
+		document.getElementById(this.id).innerHTML = html;
+
+
+		document.getElementById(this.id + 'btnNewUser').addEventListener('click', event => this.onNewUserButtonClick(event));
+		document.getElementById(this.id + 'btnDeleteUser').addEventListener('click', event => this.onDeleteButtonClick(event));
+		document.getElementById(this.id + 'btnEditUser').addEventListener('click', event => this.onEditButtonClick(event));
+
+		// probar despues como arreglarlo
+
+		/* document.getElementById('CRUD-Tabble').addEventListener('click', event => { // Step 2
+			if (event.target.className === 'editUser') { // Step 3
+				document.getElementById(this.id).addEventListener('click', event => this.onEditButtonClick(event));
+			}
+		});
+		document.getElementById('CRUD-Tabble').addEventListener('click', event => { // Step 2
+			if (event.target.className === 'deleteUser') { // Step 3
+				document.getElementById(this.id).addEventListener('click', event => this.onDeleteButtonClick(event));
+			}
+		}); */
+
 	}
 
-	onNewUserButtonClick()
-	{
-		window.prompt('Ingrese datos para el nuevo usuario');
+	checkIfIsRight() {
+		if (this.innerModel.isUsernameAlreadyExists(id) === false) {
+			alert("Ese Nombre esta en uso");
+		}
 	}
 
-	onEditButtonClick()
-	{
-		window.prompt('Editando el usuario', 'Datos del usuario');
+	onNewUserButtonClick() {
+
+		let userName = window.prompt('Ingrese Username para el nuevo usuario');
+		let name = window.prompt('Ingrese el Nombre del nuevo usuario');
+		let pass = window.prompt('Ingrese el Password del nuevo usuario');
+
+		this.innerModel.create({
+			username: userName,
+			name: name,
+			password: pass
+		});
+		this.update();
 	}
 
-	onTestButtonClick()
-	{
+	onEditButtonClick() {
+
+		let userNameToEdit = window.prompt('Ingrese Username que desea Editar');
+
+		let editedUserData = {
+			username: window.prompt('Ingrese Username para el nuevo usuario'),
+			name: window.prompt('Ingrese el Nombre del nuevo usuario'),
+			password: window.prompt('Ingrese el Password del nuevo usuario')
+		}
+
+		this.innerModel.edit(userNameToEdit, editedUserData);
+		this.update();
+	}
+
+	onDeleteButtonClick() {
+		let userName = window.prompt('Ingrese el Username que desea Borrar');
 		window.confirm('¿Está seguro de borrar el usuario?');
-	}
-
-	attach( id )
-	{
-		document.getElementById(id).innerHTML = this.generateHTML();
-
-		document.getElementById( this.id + 'btnNewUser').addEventListener('click', this.onNewUserButtonClick );
-		document.getElementById( this.id + 'btnTest').addEventListener('click', this.onTestButtonClick );
-	}
-
-	detach( id )
-	{
-		document.getElementById( this.id + 'btnNewUser').removeEventListener('click', this.onNewUserButtonClick );
-		document.getElementById( this.id + 'btnTest').removeEventListener('click', this.onTestButtonClick );
-
-		document.getElementById(id).innerHTML = '';
+		this.innerModel.delete(userName);
+		this.update();
 	}
 
 }
 
 
 
-export { UserView };
+export {
+	UserView
+};

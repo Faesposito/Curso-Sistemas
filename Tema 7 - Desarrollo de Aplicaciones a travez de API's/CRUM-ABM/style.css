@@ -1,5 +1,12 @@
-table,td,th,tr
-{
-	border:1px solid black;
+table,
+td,
+th,
+tr {
+	border: 1px solid black;
 	border-collapse: collapse;
+}
+
+button {
+	display: inline-block;
+	background-color: green;
 }

@@ -1,0 +1,4 @@
+Leer:
+
+Esta versión modularizada en archivos, debe ejecutarse a través del servidor HTTP.
+Por lo tanto será necesario como en actividades anteriores, copiar la carpeta y ejecutarla desde: localhost

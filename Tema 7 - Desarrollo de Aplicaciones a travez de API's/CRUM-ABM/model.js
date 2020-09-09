@@ -17,79 +17,89 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class UserModel
-{
-	constructor()
-	{
+class UserModel {
+	constructor() {
 		this.innerData = new Array();
 	};
 
-	create( userData )
-	{
-		if ( this.isValidUserData(userData) && this.isUsernameAlreadyExists(userData.username) )
-		{
-			this.innerData.push( userData );
+	create(userData) {
+		if (this.isValidUserData(userData) && this.isUsernameAlreadyExists(userData.username)) {
+			this.innerData.push(userData);
 		}
 	}
 
-	edit( username, newUserData )
-	{
-		let index = this.innerData.findIndex( user => user.username === username );
+	edit(username, newUserData) {
 
-		if ( index >= 0 && this.isValidUserData(newUserData) && this.isUsernameAlreadyExists(userData.username) )
-		{
-			Object.assign(this.innerData[index], newUserData);
+		let index = this.innerData.findIndex(user => user.username === username);
+
+		if (index >= 0 && this.isValidUserData(newUserData) && this.isUsernameAlreadyExists(newUserData.username)) {
+			this.innerData[index].username = newUserData.username;
+			this.innerData[index].name = newUserData.name;
+			this.innerData[index].password = newUserData.password;
 		}
 	};
 
-	delete( username )
-	{
-		let index = this.innerData.findIndex( user => user.username === username );
+	delete(username) {
+		let index = this.innerData.findIndex(user => user.username === username);
 
-		if ( index >= 0 )
-		{
-			this.innerData.splice(index,1);
+		if (index >= 0) {
+			this.innerData.splice(index, 1);
 		}
 	};
 
-	getByUsername( username )
-	{
-		if ( typeof(username) === 'string' )
-		{
-			let index = this.innerData.findIndex( user => user.username === username );
+	getByUsername(username) {
+		if (typeof (username) === 'string') {
+			let index = this.innerData.findIndex(user => user.username === username);
 
-			return ( index >= 0 )? this.innerData[index] : null;
-		}
-		else
-		{
+			return (index >= 0) ? this.innerData[index] : null;
+		} else {
 			return null;
 		}
 	};
 
-	getAll()
-	{
+	getAll() {
 		return this.innerData;
 	};
 
-	isUsernameAlreadyExists( username )
-	{
-		return ( this.getByUsername( username ) == null )? true : false;
+	isUsernameAlreadyExists(username) {
+
+		if (this.getByUsername(username) == null) {
+			return true;
+		} else {
+			alert("El Nombre Elegido ya esta en Uso.");
+			return false;
+		}
 	};
 
-	isValidUserData( userData )
-	{
-		let success = true;
+	isPasswordValid(userData) {
 
 		let passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16})");
 
-		success = ( success && userData.hasOwnProperty('username') && userData.username != null );
-		success = ( success && userData.hasOwnProperty('name') && userData.name != null );
-		success = ( success && userData.hasOwnProperty('password') && userData.password.match(passwordRegex) );
+		if (userData.hasOwnProperty('password') && userData.password.match(passwordRegex)) {
+			return true;
+		} else {
+			alert("El Password no cumple con los requerimientos.");
+			return false;
+		}
+	};
 
+	isValidUserData(userData) {
+
+		let success = true;
+		success = (success && userData.hasOwnProperty('username') && userData.username != null);
+		success = (success && userData.hasOwnProperty('name') && userData.name != null);
+		success = this.isPasswordValid(userData);
+
+		if (success)
+			return success;
+		else
+			alert("No Cumple con lo Solicitado");
 		return success;
 	};
 
 };
 
 
-export { UserModel };
+export {
+	UserModel
+};
