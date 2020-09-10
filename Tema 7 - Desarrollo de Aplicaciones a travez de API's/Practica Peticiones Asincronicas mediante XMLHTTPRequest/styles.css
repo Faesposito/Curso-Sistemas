@@ -47,7 +47,7 @@ button:active {
   display: flex;
 
   margin: 5vh auto 0;
-  flex-direction: colum;
+  flex-direction: column;
   flex-wrap: wrap;
   align-content: space-around;
 }

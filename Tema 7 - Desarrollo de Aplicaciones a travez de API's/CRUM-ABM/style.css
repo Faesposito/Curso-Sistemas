@@ -1,12 +1,128 @@
-table,
-td,
-th,
-tr {
-	border: 1px solid black;
-	border-collapse: collapse;
+body {
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+}
+
+
+h1 {
+	text-align: center;
+	font-size: 3rem;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
+
+h1 span {
+	letter-spacing: 10px;
+	color: blue;
 }
 
 button {
-	display: inline-block;
-	background-color: green;
+	outline: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: black;
+	border-radius: 5px;
+	box-shadow: 0px 12px 14px -4px rgba(0, 0, 0, 0.75);
+}
+
+.newUser {
+	background: #30A54A;
+	font-size: 2rem;
+	border: 1px solid rgb(146, 66, 66);
+}
+
+.newUser:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.newUser:active {
+	background: #227534;
+}
+
+.editUser {
+	background: #FDC02E;
+	color: black;
+}
+
+.editUser:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.editUser:active {
+	background: #FDC02E;
+}
+
+.deleteUser {
+	background: #ED1C24;
+	color: white;
+}
+
+.deleteUser:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.deleteUser:active {
+	background: #ED1C24;
+}
+
+.editUser,
+.deleteUser {
+	width: 75%;
+	height: 75%;
+	font-size: 1.2rem;
+	border: none;
+	margin: 0px;
+	text-align: center;
+	justify-items: center;
+}
+
+
+
+.CrudContainner {
+
+	background-color: #c0f4fd;
+	min-width: 40%;
+	max-width: 50%;
+	height: 50vh;
+
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+
+	margin: 5vh auto 0;
+	flex-direction: column;
+	align-content: space-around;
+
+
+}
+
+table,
+tr,
+td,
+th {
+	border-bottom: 1px solid rgb(150, 149, 149, 0.7);
+	border-collapse: collapse;
+	background-color: white;
+	margin: 0px;
+	height: 15%;
+}
+
+td {
+	height: 4rem;
+}
+
+.CrudWrapper {
+	width: 100%;
+	height: auto;
+	border-top: 0.5px solid lightgrey;
+	margin: 0px;
+	padding: 0px;
+}
+
+.CrudWrapper th {
+	color: black;
+	background-color: white;
 }

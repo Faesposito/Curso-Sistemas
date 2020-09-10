@@ -22,6 +22,7 @@ import {
 } from "./model.js";
 
 class UserView {
+
   constructor(id) {
     this.innerModel = new UserModel();
     this.id = id;
@@ -29,16 +30,29 @@ class UserView {
     this.update();
   }
 
+  eventListeners() {
+    document.getElementById("CrudWrapperID").addEventListener("click", (event) => {
+      if (event.target.matches("button.editUser")) {
+        document.getElementById(event.target.id).addEventListener("click", (event) => this.onEditButtonClick(event));
+      } else if (event.target.matches("button.deleteUser")) {
+        document.getElementById(event.target.id).addEventListener("click", (event) => this.onDeleteButtonClick(event));
+      } else {
+        return;
+      }
+    });
+  }
+
   update() {
-    let html = `<h1>CRUD Users</h1>
-    <div >
-		<table id="CRUD-Wrapper">
-		<tr>
-			<th>Username</th>
-			<th>Nombre de usuario</th>
-			<th>Contraseña</th>
-			<th colspan = 2 >Acciones</th>
-		<tr>`;
+    let html =
+      `<h1> <span>C.R.U.D</span> Users</h1>
+      <div class="CrudContainner">
+		    <table id="CrudWrapperID" class="CrudWrapper">
+          <thead>
+            <th>Username</th>
+            <th>Nombre de usuario</th>
+            <th>Contraseña</th>
+            <th colspan = 2 >Acciones</th>
+          <thead>`;
 
     for (let user of this.innerModel.getAll()) {
       html += `<tr>
@@ -49,36 +63,23 @@ class UserView {
 						<button id="${user.username}-editButton" class="editUser" >Editar</button>
 				</td>
 				<td>
-						<button id="${user.username}-deleteButton" class="deleteUser">Borrar</button>
+						<button id="${user.username}-deleteButton" class="deleteUser" >Borrar</button>
 				</td>
 			<tr>`;
     }
 
-    html += `</table>
+    html +=
+      `</table>
+      </div>
 		<br>
-		<button id="${this.id}btnNewUser" class= "newUser">Nuevo Usuario</button>
-		<button id="${this.id}btnEditUser" class= "editUser">Editar Usuario</button>
-    <button id="${this.id}btnDeleteUser" class= "deleteUser">Borrar Usuario</button>
-    </div>`;
+		<button id="${this.id}btnNewUser" class= "newUser" >Nuevo Usuario</button>
+    `;
 
     document.getElementById(this.id).innerHTML = html;
 
-    document.getElementById(this.id + 'btnNewUser').addEventListener("click", (event) => this.onNewUserButtonClick(event));
-    document.getElementById(this.id + 'btnEditUser').addEventListener("click", (event) => this.onEditButtonClick(event));
-    document.getElementById(this.id + 'btnDeleteUser').addEventListener("click", (event) => this.onDeleteButtonClick(event));
+    document.getElementById(this.id + "btnNewUser").addEventListener("click", (event) => this.onNewUserButtonClick(event));
 
-    // funciona pero con doble Click... Hay que descubrir por que.
-    document.getElementById("CRUD-Wrapper").addEventListener("click", (event) => {
-
-      if (event.target.matches("button.editUser")) {
-        document.getElementById(event.target.id).addEventListener("click", (event) => this.onEditButtonClick(event));
-      } else if (event.target.matches("button.deleteUser")) {
-        document.getElementById(event.target.id).addEventListener("click", (event) => this.onDeleteButtonClick(event));
-      } else {
-        return
-      }
-    });
-
+    this.eventListeners();
   }
 
   checkIfIsRight() {
@@ -88,7 +89,6 @@ class UserView {
   }
 
   onNewUserButtonClick() {
-
     let userName = window.prompt("Ingrese Username para el nuevo usuario");
     let name = window.prompt("Ingrese el Nombre del nuevo usuario");
     let pass = window.prompt("Ingrese el Password del nuevo usuario");
