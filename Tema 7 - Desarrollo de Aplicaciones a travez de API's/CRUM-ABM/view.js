@@ -30,7 +30,15 @@ class UserView {
     this.update();
   }
 
-  eventListeners() {
+  eventListeners() 
+  {
+    /*El problema de porqué hay que hacer click dos veces para que funcione, es porque estás usando uno de los clicks
+    para hacer la primera asociación de próximos eventos de click.
+    Fijate que la primera sentencia, pasa por parámetro una función que se encarga de asignar otra función de respuesta para el click.
+    Con lo cual, un click te queda con el objetivo de hacer la asociación, y de ahí en adelante, el próximo click queda vinculado a la pantalla de edición.
+
+    Esto se soluciona en otra parte.. te dejo el código expresado en la función update/
+
     document.getElementById("CrudWrapperID").addEventListener("click", (event) => {
       if (event.target.matches("button.editUser")) {
         document.getElementById(event.target.id).addEventListener("click", (event) => this.onEditButtonClick(event));
@@ -40,6 +48,8 @@ class UserView {
         return;
       }
     });
+
+    */
   }
 
   update() {
@@ -79,7 +89,34 @@ class UserView {
 
     document.getElementById(this.id + "btnNewUser").addEventListener("click", (event) => this.onNewUserButtonClick(event));
 
-    this.eventListeners();
+    /*La asociación de evento de los botones editar y borrar quedaría de esta manera.
+    Hay muchas maneras de hacerlo, acá te propongo una de las más simples y en mi opinión la mejor manera de hacerlo.
+    Asignás una escucha de click sobre toda la tabla, pero solo contestás el click, cuando el elemento original que recibe el 
+    click se trata de un elemento que contiene la clase editUser, o deleteUser.
+
+    */
+
+    document.getElementById("CrudWrapperID").addEventListener("click", (event) =>
+    {
+      //event.target <-- Devuelve el elemento que recibió el click, aunque estemos escuchando el click sobre toda la tabla.
+      console.log(event.target);
+
+      //Si el elemento que recibió el click contiene la clase editUser, entonces contesto con la ejecución de onEditButtonClick
+      if ( event.target.classList.contains("editUser") )
+        this.onEditButtonClick(event);
+
+      //..idem para delete
+      if ( event.target.classList.contains("deleteUser") )
+        this.onDeleteButtonClick(event);
+    });
+
+    /*No es la única manera de hacerlo, esta es la más simple y la que menos código lleva.
+    La otra es que recorras todos los elementos <tr> de la tabla, localices el botton en cuestión y asignes la función
+    de respuesta para c/u, generalmente se encuentra esa opción por internet como forma rápida de solución. 
+    El problema con ese enfoque es que sobrecargás mucho la memoria del navegador si tu lista tiene más de 10000 filas*/
+
+
+    //this.eventListeners();
   }
 
   checkIfIsRight() {
