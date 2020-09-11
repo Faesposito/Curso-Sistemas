@@ -17,12 +17,9 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-  UserModel
-} from "./model.js";
+import { UserModel } from "./model.js";
 
 class UserView {
-
   constructor(id) {
     this.innerModel = new UserModel();
     this.id = id;
@@ -30,8 +27,7 @@ class UserView {
     this.update();
   }
 
-  eventListeners() 
-  {
+  eventListeners() {
     /*El problema de porqué hay que hacer click dos veces para que funcione, es porque estás usando uno de los clicks
     para hacer la primera asociación de próximos eventos de click.
     Fijate que la primera sentencia, pasa por parámetro una función que se encarga de asignar otra función de respuesta para el click.
@@ -48,14 +44,11 @@ class UserView {
         return;
       }
     });
-
     */
   }
 
   update() {
-    let html =
-      `
-      <div id='newUserModal'>
+    let html = `<div id='newUserModal'>
         <div class='signup'>
             <form>
                 <h1>Create New User</h1>
@@ -71,7 +64,6 @@ class UserView {
       <h1> C.R.U.D Users</h1>
 
       <div class="CrudContainner">
-        
 		      <table id="CrudWrapperID" class="CrudWrapper">
             <thead>
               <th>Username</th>
@@ -86,28 +78,23 @@ class UserView {
 				<td>${user.name}</td>
 				<td>${user.password}</td>
 				<td>
-						<button id="${user.username}-editButton" class="editUser" >Editar</button>
+						<button class="editUser" >Editar</button>
 				</td>
 				<td>
-						<button id="${user.username}-deleteButton" class="deleteUser" >Borrar</button>
+						<button class="deleteUser" >Borrar</button>
 				</td>
 			<tr>`;
     }
 
-    html +=
-      `</table>
-      <div class= "containnerButton">
-        <button id="${this.id}btnNewUser" class= "newUser" >Nuevo Usuario</button> 
-      </div>
-      </div>
-		<br>
-    
-    
-    `;
+    html += `   </table>
+          <div class= "containnerButton">
+            <button id="${this.id}btnNewUser" class= "newUser" >Nuevo Usuario</button> 
+          </div>
+      </div>`;
 
     document.getElementById(this.id).innerHTML = html;
 
-    document.getElementById(this.id + "btnNewUser").addEventListener("click", (event) => this.onNewUserButtonClick(event));
+    document.getElementById(`${this.id}btnNewUser`).addEventListener("click", (event) => this.onNewUserButtonClick(event));
 
     /*La asociación de evento de los botones editar y borrar quedaría de esta manera.
     Hay muchas maneras de hacerlo, acá te propongo una de las más simples y en mi opinión la mejor manera de hacerlo.
@@ -116,27 +103,17 @@ class UserView {
 
     */
 
-    document.getElementById("CrudWrapperID").addEventListener("click", (event) =>
-    {
+    document.getElementById("CrudWrapperID").addEventListener("click", (event) => {
       //event.target <-- Devuelve el elemento que recibió el click, aunque estemos escuchando el click sobre toda la tabla.
-      console.log(event.target);
-
       //Si el elemento que recibió el click contiene la clase editUser, entonces contesto con la ejecución de onEditButtonClick
-      if ( event.target.classList.contains("editUser") )
-        this.onEditButtonClick(event);
-
-      //..idem para delete
-      if ( event.target.classList.contains("deleteUser") )
-        this.onDeleteButtonClick(event);
+      if (event.target.classList.contains("editUser")) this.onEditButtonClick(event);
+      if (event.target.classList.contains("deleteUser")) this.onDeleteButtonClick(event);
     });
 
     /*No es la única manera de hacerlo, esta es la más simple y la que menos código lleva.
     La otra es que recorras todos los elementos <tr> de la tabla, localices el botton en cuestión y asignes la función
     de respuesta para c/u, generalmente se encuentra esa opción por internet como forma rápida de solución. 
     El problema con ese enfoque es que sobrecargás mucho la memoria del navegador si tu lista tiene más de 10000 filas*/
-
-
-    //this.eventListeners();
   }
 
   checkIfIsRight() {
@@ -146,15 +123,12 @@ class UserView {
   }
 
   newUserModal() {
-
     let modal = document.getElementById("newUserModal");
     modal.style.display = "block";
-
   }
 
   onNewUserButtonClick() {
-
-    this.newUserModal();
+    //this.newUserModal();
 
     let userName = window.prompt("Ingrese Username para el nuevo usuario");
     let name = window.prompt("Ingrese el Nombre del nuevo usuario");
@@ -165,10 +139,14 @@ class UserView {
       name: name,
       password: pass,
     });
-
+    this.update();
   }
 
   onEditButtonClick() {
+    //let evento = event.target.classList.contains("editUser").innerHTML;
+
+    //console.log(evento);
+
     let userNameToEdit = window.prompt("Ingrese Username que desea Editar");
 
     let editedUserData = {
@@ -189,6 +167,4 @@ class UserView {
   }
 }
 
-export {
-  UserView
-};
+export { UserView };
