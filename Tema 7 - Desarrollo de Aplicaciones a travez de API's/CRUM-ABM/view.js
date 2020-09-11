@@ -44,15 +44,31 @@ class UserView {
 
   update() {
     let html =
-      `<h1> <span>C.R.U.D</span> Users</h1>
+      `
+      <div id='newUserModal'>
+        <div class='signup'>
+            <form>
+                <h1>Create New User</h1>
+                <input id="userNameInfo" type='text' placeholder='UserName:' autocomplete="username" />
+                <input id="nameInfo" type='text' placeholder='Name:' autocomplete="name" />
+                <input id="passwordInfo" type='password' placeholder='Password:' autocomplete="current-password" />
+                <button id="submit" type="submit">Crear</button>
+                <button id="cancel" type="reset">Cancelar</button>
+            </form>
+        </div>
+      </div>
+
+      <h1> C.R.U.D Users</h1>
+
       <div class="CrudContainner">
-		    <table id="CrudWrapperID" class="CrudWrapper">
-          <thead>
-            <th>Username</th>
-            <th>Nombre de usuario</th>
-            <th>Contraseña</th>
-            <th colspan = 2 >Acciones</th>
-          <thead>`;
+        
+		      <table id="CrudWrapperID" class="CrudWrapper">
+            <thead>
+              <th>Username</th>
+              <th>Nombre de usuario</th>
+              <th>Contraseña</th>
+              <th colspan = 2 >Acciones</th>
+            <thead>`;
 
     for (let user of this.innerModel.getAll()) {
       html += `<tr>
@@ -70,9 +86,13 @@ class UserView {
 
     html +=
       `</table>
+      <div class= "containnerButton">
+        <button id="${this.id}btnNewUser" class= "newUser" >Nuevo Usuario</button> 
+      </div>
       </div>
 		<br>
-		<button id="${this.id}btnNewUser" class= "newUser" >Nuevo Usuario</button>
+    
+    
     `;
 
     document.getElementById(this.id).innerHTML = html;
@@ -88,7 +108,17 @@ class UserView {
     }
   }
 
+  newUserModal() {
+
+    let modal = document.getElementById("newUserModal");
+    modal.style.display = "block";
+
+  }
+
   onNewUserButtonClick() {
+
+    this.newUserModal();
+
     let userName = window.prompt("Ingrese Username para el nuevo usuario");
     let name = window.prompt("Ingrese el Nombre del nuevo usuario");
     let pass = window.prompt("Ingrese el Password del nuevo usuario");
@@ -98,7 +128,7 @@ class UserView {
       name: name,
       password: pass,
     });
-    this.update();
+
   }
 
   onEditButtonClick() {

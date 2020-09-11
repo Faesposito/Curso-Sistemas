@@ -2,30 +2,42 @@ body {
 	width: 100vw;
 	height: 100vh;
 	text-align: center;
+	background-color: #1abc9c79;
 }
-
 
 h1 {
 	text-align: center;
-	font-size: 3rem;
+	font-size: 4rem;
 	font-weight: bold;
-	color: black;
-	letter-spacing: 5px;
+	color: rgb(55, 54, 56);
+	letter-spacing: 8px;
 	text-transform: uppercase;
+	margin-top: 5%;
 }
 
-h1 span {
-	letter-spacing: 10px;
-	color: blue;
+.CrudContainner {
+
+	min-width: 30%;
+	max-width: 40%;
+	min-height: 50vh;
+	max-height: 70%;
+	margin: 0 auto;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-content: space-around;
 }
 
-button {
+.CrudContainner .containnerbutton {
+	min-width: 45%;
+	max-width: 45%;
 	outline: none;
-	text-transform: uppercase;
+	margin: 0 auto;
 	letter-spacing: 1px;
 	color: black;
 	border-radius: 5px;
 	box-shadow: 0px 12px 14px -4px rgba(0, 0, 0, 0.75);
+	display: flex;
 }
 
 .newUser {
@@ -81,25 +93,7 @@ button {
 
 
 
-.CrudContainner {
-
-	background-color: #c0f4fd;
-	min-width: 40%;
-	max-width: 50%;
-	height: 50vh;
-
-	display: flex;
-	flex-flow: row;
-	flex-wrap: wrap;
-
-	margin: 5vh auto 0;
-	flex-direction: column;
-	align-content: space-around;
-
-
-}
-
-table,
+.CrudContainner table,
 tr,
 td,
 th {
@@ -110,7 +104,7 @@ th {
 	height: 15%;
 }
 
-td {
+.CrudContainner td {
 	height: 4rem;
 }
 
@@ -120,9 +114,85 @@ td {
 	border-top: 0.5px solid lightgrey;
 	margin: 0px;
 	padding: 0px;
+
 }
 
 .CrudWrapper th {
 	color: black;
 	background-color: white;
 }
+
+
+/************* Form Css ***************/
+
+
+#newUserModal {
+	display: none;
+	z-index: 100;
+	min-width: 30%;
+	min-height: 45%;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -10%;
+	margin-left: -15%;
+}
+
+.showModal {
+	display: block;
+}
+
+.newUserModal h1 {
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.signup {
+	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 30px 20px;
+	background-color: white;
+	text-align: center;
+	border-radius: 5px;
+}
+
+[type=text],
+[type=password] {
+	display: block;
+	margin: 0 auto;
+	width: 80%;
+	border: 0;
+	border-bottom: 2px solid rgba(0, 0, 0, .2);
+	height: 45px;
+	line-height: 45px;
+	margin-bottom: 10px;
+	font-size: 1em;
+	color: rgba(0, 0, 0, .4);
+}
+
+[type='text']:focus,
+[type=password]:focus {
+	outline: none;
+	border-color: #237375;
+}
+
+.signup button {
+	margin-top: 25px;
+	width: 80%;
+	border: 0;
+	background-color: #53CACE;
+	border-radius: 5px;
+	height: 50px;
+	color: white;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+
+/********** End of Form Css ************/

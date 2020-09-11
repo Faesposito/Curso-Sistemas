@@ -17,6 +17,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {UserView} from './view.js';
+import {
+	UserView
+} from './view.js';
 
 let view = new UserView('crud');
