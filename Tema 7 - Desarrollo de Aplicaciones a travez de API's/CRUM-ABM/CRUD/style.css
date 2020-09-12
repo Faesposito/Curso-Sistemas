@@ -1,11 +1,14 @@
 body {
+
 	width: 100vw;
 	height: 100vh;
 	text-align: center;
 	background-color: #1abc9c79;
+
 }
 
 h1 {
+
 	text-align: center;
 	font-size: 4rem;
 	font-weight: bold;
@@ -13,31 +16,88 @@ h1 {
 	letter-spacing: 8px;
 	text-transform: uppercase;
 	margin-top: 5%;
+	text-shadow: 0px 5px 4px rgba(92, 119, 129, 0.78);
 }
 
-.CrudContainner {
 
-	min-width: 30%;
-	max-width: 40%;
-	min-height: 50vh;
-	max-height: 70%;
+/*********** Containner Styles ***********/
+
+.Containner {
+
+	position: relative;
+	width: clamp(30%, 35%, 40%);
+	height: clamp(50vh, 60vh, 70vh);
 	margin: 0 auto;
-	background-color: white;
+
 	display: flex;
-	flex-direction: column;
-	align-content: space-around;
+	flex-flow: column;
+	align-content: center;
+
+	background-color: white;
+
 }
 
-.CrudContainner .containnerbutton {
-	min-width: 45%;
-	max-width: 45%;
+.ButtonContainner button {
+
+	width: clamp(30%, 40%, 45%);
 	outline: none;
-	margin: 0 auto;
+
+	position: absolute;
+	margin: auto;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	text-align: center;
 	letter-spacing: 1px;
 	color: black;
+
+}
+
+.TabbleContainer table {
+
+	width: 100%;
+	height: auto;
+	border-top: 0.5px solid lightgrey;
+
+}
+
+.TabbleContainer table,
+tr,
+td,
+th {
+
+	border-bottom: 1px solid rgb(150, 149, 149, 0.7);
+	border-collapse: collapse;
+	background-color: rgb(247, 244, 244);
+	color: black;
+	line-height: 3rem;
+
+}
+
+.TabbleContainer th {
+
+
+	background-color: rgb(207, 206, 233);
+	line-height: 4rem;
+
+	font-size: 1.2rem;
+	font-weight: bolder;
+	text-shadow: 0px 5px 4px rgba(92, 119, 129, 0.78);
+
+}
+
+
+/******** End of Containner Styles *******/
+
+
+
+
+/*********** Buttons Styles *********/
+
+button {
 	border-radius: 5px;
 	box-shadow: 0px 12px 14px -4px rgba(0, 0, 0, 0.75);
-	display: flex;
 }
 
 .newUser {
@@ -46,38 +106,14 @@ h1 {
 	border: 1px solid rgb(146, 66, 66);
 }
 
-.newUser:hover {
-	transform: scale(1.1, 1.1);
-}
-
-.newUser:active {
-	background: #227534;
-}
-
 .editUser {
 	background: #FDC02E;
 	color: black;
 }
 
-.editUser:hover {
-	transform: scale(1.1, 1.1);
-}
-
-.editUser:active {
-	background: #FDC02E;
-}
-
 .deleteUser {
 	background: #ED1C24;
 	color: white;
-}
-
-.deleteUser:hover {
-	transform: scale(1.1, 1.1);
-}
-
-.deleteUser:active {
-	background: #ED1C24;
 }
 
 .editUser,
@@ -91,36 +127,19 @@ h1 {
 	justify-items: center;
 }
 
-
-
-.CrudContainner table,
-tr,
-td,
-th {
-	border-bottom: 1px solid rgb(150, 149, 149, 0.7);
-	border-collapse: collapse;
-	background-color: white;
-	margin: 0px;
-	height: 15%;
+button:hover {
+	transform: scale(1.1, 1.1);
+	filter: brightness(110%);
 }
 
-.CrudContainner td {
-	height: 4rem;
+button:active {
+	filter: brightness(85%) saturate(100%);
 }
 
-.CrudWrapper {
-	width: 100%;
-	height: auto;
-	border-top: 0.5px solid lightgrey;
-	margin: 0px;
-	padding: 0px;
 
-}
+/******** End of Buttons Styles *******/
 
-.CrudWrapper th {
-	color: black;
-	background-color: white;
-}
+
 
 
 /************* Form Css ***************/

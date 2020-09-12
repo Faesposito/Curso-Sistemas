@@ -35,14 +35,15 @@ class UserView {
       
       <h1> C.R.U.D Users</h1>
 
-      <div class="CrudContainner">
-		      <table id="CrudWrapperID" class="CrudWrapper">
-            <thead>
-              <th>Username</th>
-              <th>Nombre de usuario</th>
-              <th>Contraseña</th>
-              <th colspan = 2 >Acciones</th>
-            <thead>`;
+      <div class="Containner">
+        <div id="TabbleContainerID" class="TabbleContainer">
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Nombre de usuario</th>
+                    <th>Contraseña</th>
+                    <th colspan=2>Acciones</th>
+                </tr>`;
 
     for (let user of this.innerModel.getAll()) {
       html += `<tr>
@@ -58,10 +59,12 @@ class UserView {
 			<tr>`;
     }
 
-    html += `   </table>
-          <div class= "containnerButton">
-            <button id="${this.id}btnNewUser" class= "newUser" >Nuevo Usuario</button> 
-          </div>
+    html +=
+      `     </table>
+        </div>
+        <div class="ButtonContainner">
+          <button id="${this.id}btnNewUser" class="newUser">Nuevo Usuario</button>
+        </div>
       </div>`;
 
 
@@ -69,7 +72,7 @@ class UserView {
 
     document.getElementById(`${this.id}btnNewUser`).addEventListener("click", (event) => this.onNewUserButtonClick(event));
 
-    document.getElementById("CrudWrapperID").addEventListener("click", (event) => {
+    document.getElementById("TabbleContainerID").addEventListener("click", (event) => {
       if (event.target.classList.contains("editUser")) this.onEditButtonClick(event);
       if (event.target.classList.contains("deleteUser")) this.onDeleteButtonClick(event);
     });
