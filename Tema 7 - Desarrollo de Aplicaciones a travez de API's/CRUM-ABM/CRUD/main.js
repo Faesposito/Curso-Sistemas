@@ -1,8 +1,10 @@
 /*
-	Example: UserCRUDApplication // CRUD-Development
+	Example: UserModel Module // CRUD-Development
 	Copyright (C) 2020 - Curso de Desarrollo de Sistemas 
+	Autor: Matías Gastón Santiago
 	https://educacion.batan.coop/course/view.php?id=9
 */
+
 
 import {
 	UserModel
@@ -14,5 +16,3 @@ import {
 
 let model = new UserModel();
 let view = new UserView('crud', model);
-
-model.addEventListener('change', event => view.update(event))

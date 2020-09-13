@@ -1,41 +1,48 @@
 /*
-	Example: UserView Module // CRUD-Development
+	Example: UserModel Module // CRUD-Development
 	Copyright (C) 2020 - Curso de Desarrollo de Sistemas 
+	Autor: Matías Gastón Santiago
 	https://educacion.batan.coop/course/view.php?id=9
 */
 
-
+import {
+  UserViewController
+} from "./controller.js"
 
 class UserView {
 
   constructor(id, model) {
 
-    this.innerModel = model;
     this.id = id;
 
-    this.update();
+    this.innerModel = model;
+
+    this.innerController = new UserViewController(model, this);
+
+    this.modalStatus = false;
+
   }
 
   update() {
-    let html =
 
-      `
+    let html = `
+
       <div id='newUserModal'>
-        <div class='signup'>
-            <form>
-                <h1>Create New User</h1>
-                <input id="userNameInfo" type='text' placeholder='UserName:' autocomplete="username" />
-                <input id="nameInfo" type='text' placeholder='Name:' autocomplete="name" />
-                <input id="passwordInfo" type='password' placeholder='Password:' autocomplete="current-password" />
-                <button id="submit" type="submit">Crear</button>
-                <button id="cancel" type="reset">Cancelar</button>
-            </form>
+        <div class='signUpForm'>
+          <form id="signUpForm" name="signUpForm">
+            <h1>Create New User</h1>
+            <input type="text" id="username" name="username" placeholder='Username:' autocomplete="Username" />
+            <input type='text' id="name" name="name" placeholder='Name:' autocomplete="name" />
+            <input type='password' id="password" name="password" placeholder='Password:' autocomplete="current-password" />
+            <button id="submitForm" type="submit">Crear</button>
+            <button id="closeModal">Cerrar</button>
+          </form>
         </div>
       </div>
-      
+
       <h1> C.R.U.D Users</h1>
 
-      <div class="Containner">
+      <div id= "ContainnerID" class="Containner">
         <div id="TabbleContainerID" class="TabbleContainer">
             <table>
                 <tr>
@@ -45,8 +52,13 @@ class UserView {
                     <th colspan=2>Acciones</th>
                 </tr>`;
 
-    for (let user of this.innerModel.getAll()) {
-      html += `<tr>
+    let userArray = this.innerModel.getAll();
+
+    if (userArray.length > 0) {
+
+      for (let user of userArray) {
+
+        html += `<tr>
 				<td>${user.username}</td>
 				<td>${user.name}</td>
 				<td>${user.password}</td>
@@ -56,11 +68,16 @@ class UserView {
 				<td>
 						<button class="deleteUser" >Borrar</button>
 				</td>
-			<tr>`;
+      <tr>`;
+
+      }
+
+    } else {
+      html += `<tr><td colspan="4">No hay datos disponibles</td></tr>`;
     }
 
-    html +=
-      `     </table>
+    html += `     
+    </table>
         </div>
         <div class="ButtonContainner">
           <button id="${this.id}btnNewUser" class="newUser">Nuevo Usuario</button>
@@ -68,51 +85,50 @@ class UserView {
       </div>`;
 
 
+
+    /*********************************************************************************************************************/
+    /***********************************     Event Listeners      ********************************************************/
+    /*********************************************************************************************************************/
+
+
     document.getElementById(this.id).innerHTML = html;
 
-    document.getElementById(`${this.id}btnNewUser`).addEventListener("click", (event) => this.onNewUserButtonClick(event));
+    document.getElementById(`${this.id}btnNewUser`).addEventListener("click", (event) => this.innerController.onNewUserButtonClick(event));
 
     document.getElementById("TabbleContainerID").addEventListener("click", (event) => {
-      if (event.target.classList.contains("editUser")) this.onEditButtonClick(event);
-      if (event.target.classList.contains("deleteUser")) this.onDeleteButtonClick(event);
+      if (event.target.classList.contains("editUser")) this.innerController.onEditButtonClick(event);
+      if (event.target.classList.contains("deleteUser")) this.innerController.onDeleteButtonClick(event);
     });
 
+    document.getElementById("closeModal").addEventListener("click", (event) => this.innerController.onCloseModalClick(event));
+    document.querySelector('form').addEventListener('submit', (event) => this.innerController.onModalSubmitNewUserClick(event));
+
+
+    /*********************************************************************************************************************/
+    /*********************************** End of Event Listeners **********************************************************/
+    /*********************************************************************************************************************/
   }
 
-  newUserModal() {
-    let modal = document.getElementById("newUserModal");
-    modal.style.display = "block";
-  }
+  modalSwitch() {
 
-  onNewUserButtonClick() {
+    if (!this.modalStatus) {
 
-    this.newUserModal();
+      document.getElementById("newUserModal").style.display = "block";
+      document.getElementById("ContainnerID").style.display = "none";
+      document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
 
-    this.innerModel.create({
-      username: window.prompt("Ingrese Username para el nuevo usuario"),
-      name: window.prompt("Ingrese el Nombre del nuevo usuario"),
-      password: window.prompt("Ingrese el Password del nuevo usuario"),
-    });
+      return this.modalStatus = true;
 
-  }
+    } else {
 
-  onEditButtonClick() {
+      document.getElementById("newUserModal").style.display = "none";
+      document.getElementById("ContainnerID").style.display = "block";
 
-    let userNameToEdit = window.prompt("Ingrese Username que desea Editar");
-
-    let editedUserData = {
-      username: window.prompt("Ingrese Username para el nuevo usuario"),
-      name: window.prompt("Ingrese el Nombre del nuevo usuario"),
-      password: window.prompt("Ingrese el Password del nuevo usuario"),
-    };
-
-    this.innerModel.edit(userNameToEdit, editedUserData);
+      return this.modalStatus = false;
+    }
 
   }
 
-  onDeleteButtonClick() {
-    this.innerModel.delete(window.prompt("Ingrese el Username que desea Borrar"));
-  }
 }
 
 export {

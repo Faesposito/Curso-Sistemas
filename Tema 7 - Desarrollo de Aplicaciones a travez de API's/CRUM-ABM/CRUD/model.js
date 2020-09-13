@@ -1,18 +1,23 @@
 /*
 	Example: UserModel Module // CRUD-Development
 	Copyright (C) 2020 - Curso de Desarrollo de Sistemas 
+	Autor: Matías Gastón Santiago
 	https://educacion.batan.coop/course/view.php?id=9
 */
 
 class UserModel extends EventTarget {
+
+
 	constructor() {
+
 		super();
 		this.innerData = new Array();
+
 	};
 
 	create(userData) {
 
-		if (this.isValidUserData(userData) && this.isUsernameAlreadyExists(userData.username)) {
+		if (this.isValidUserData(userData)) {
 			this.innerData.push(userData);
 			this.dispatchEvent(new CustomEvent("change"));
 		} else this.dispatchEvent(new CustomEvent("change"));
@@ -24,20 +29,22 @@ class UserModel extends EventTarget {
 
 		let index = this.innerData.findIndex(user => user.username === username);
 
-		if (index >= 0 && this.isValidUserData(newUserData) && this.isUsernameAlreadyExists(newUserData.username)) {
+		if (index >= 0 && this.isValidUserData(newUserData)) {
 			Object.assign(this.innerData[index], newUserData);
 			this.dispatchEvent(new CustomEvent("change"));
 		}
+
 	};
 
 	delete(username) {
 
 		let index = this.innerData.findIndex(user => user.username === username);
 
-		if (index >= 0 && window.confirm("¿Está seguro de borrar el usuario?")) {
+		if (index >= 0) {
 			this.innerData.splice(index, 1);
 			this.dispatchEvent(new CustomEvent("change"));
 		}
+
 	};
 
 	getByUsername(username) {
@@ -49,20 +56,19 @@ class UserModel extends EventTarget {
 		} else {
 			return null;
 		}
+
 	};
 
 	getAll() {
+
 		return this.innerData;
+
 	};
 
 	isUsernameAlreadyExists(username) {
 
-		if (this.getByUsername(username) == null) {
-			return true;
-		} else {
-			alert("El Nombre Elegido ya esta en Uso.");
-			return false;
-		}
+		return (this.getByUsername(username) == null) ? false : true;
+
 	};
 
 	isPasswordValid(userData) {
@@ -75,6 +81,7 @@ class UserModel extends EventTarget {
 			alert("El Password no cumple con los requerimientos.");
 			return false;
 		}
+
 	};
 
 	isValidUserData(userData) {
@@ -89,6 +96,7 @@ class UserModel extends EventTarget {
 		else
 			alert("No Cumple con lo Solicitado");
 		return success;
+
 	};
 
 };
