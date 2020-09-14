@@ -19,24 +19,47 @@ class UserView {
 
     this.innerController = new UserViewController(model, this);
 
-    this.modalStatus = false;
-
   }
 
   update() {
 
     let html = `
 
-      <div id='newUserModal'>
-        <div class='signUpForm'>
+      <div class= "newUserModalContainner" id='newUserModal'>
+        <div class='ModalForm'>
           <form id="signUpForm" name="signUpForm">
             <h1>Create New User</h1>
-            <input type="text" id="username" name="username" placeholder='Username:' autocomplete="Username" />
-            <input type='text' id="name" name="name" placeholder='Name:' autocomplete="name" />
-            <input type='password' id="password" name="password" placeholder='Password:' autocomplete="current-password" />
-            <button id="submitForm" type="submit">Crear</button>
-            <button id="closeModal">Cerrar</button>
+            <input type="text" name="username" placeholder='Username:' autocomplete="Username" />
+            <input type='text' name="name" placeholder='Name:' autocomplete="name" />
+            <input type='password' name="password" placeholder='Password:' autocomplete="current-password" />
+            <button id="submitNewUserForm" type="submit">Crear</button>
           </form>
+          <button id="newUserCloseModal">Cerrar</button>
+        </div>
+      </div>
+
+      <div class= "editUserModalContainner" id='editUserModal'>
+        <div class='ModalForm'>
+          <form id="editUserForm" name="editUserForm">
+            <h1>Edit User</h1>
+            <input type="text" name="usernameToEdit" placeholder='Username To Edit:' autocomplete="Username" />
+            <input type="text" name="username" placeholder='Username:' autocomplete="Username" />
+            <input type='text' name="name" placeholder='Name:' autocomplete="name" />
+            <input type='password' name="password" placeholder='Password:' autocomplete="current-password" />
+            <button id="submitEditUserForm" type="submit">Editar Usuario</button>
+          </form>
+          <button id="editUserCloseModal">Cerrar</button>
+        </div>
+      </div>
+
+      <div class= "deleteModalContainner" id='deleteUserModal'>
+        <div class='ModalForm'>
+          <form id="deleteUserForm" name="deleteUserForm">
+            <h1>Delete User</h1>
+            <input type="text" name="usernameToDelete" placeholder='Username To Delete:' autocomplete="Username" />
+            <button id="submitDeleteUserForm" type="submit">Borrar Usuario</button>
+          </form>
+          <button id="deleteUserCloseModal">Cerrar</button>
         </div>
       </div>
 
@@ -85,11 +108,7 @@ class UserView {
       </div>`;
 
 
-
-    /*********************************************************************************************************************/
     /***********************************     Event Listeners      ********************************************************/
-    /*********************************************************************************************************************/
-
 
     document.getElementById(this.id).innerHTML = html;
 
@@ -100,32 +119,15 @@ class UserView {
       if (event.target.classList.contains("deleteUser")) this.innerController.onDeleteButtonClick(event);
     });
 
-    document.getElementById("closeModal").addEventListener("click", (event) => this.innerController.onCloseModalClick(event));
-    document.querySelector('form').addEventListener('submit', (event) => this.innerController.onModalSubmitNewUserClick(event));
+    document.getElementById("newUserCloseModal").addEventListener("click", (event) => this.innerController.onCloseNewUserModalClick(event));
+    document.getElementById("editUserCloseModal").addEventListener("click", (event) => this.innerController.onCloseEditUserModalClick(event));
+    document.getElementById("deleteUserCloseModal").addEventListener("click", (event) => this.innerController.onCloseDeleteUserModalClick(event));
+    document.querySelector('form#signUpForm').addEventListener('submit', (event) => this.innerController.onModalSubmitNewUserClick(event));
+    document.querySelector('form#editUserForm').addEventListener('submit', (event) => this.innerController.onModalSubmitEditUserClick(event));
+    document.querySelector('form#deleteUserForm').addEventListener('submit', (event) => this.innerController.onModalSubmitDeleteUserClick(event));
 
-
-    /*********************************************************************************************************************/
     /*********************************** End of Event Listeners **********************************************************/
-    /*********************************************************************************************************************/
-  }
 
-  modalSwitch() {
-
-    if (!this.modalStatus) {
-
-      document.getElementById("newUserModal").style.display = "block";
-      document.getElementById("ContainnerID").style.display = "none";
-      document.body.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-
-      return this.modalStatus = true;
-
-    } else {
-
-      document.getElementById("newUserModal").style.display = "none";
-      document.getElementById("ContainnerID").style.display = "block";
-
-      return this.modalStatus = false;
-    }
 
   }
 

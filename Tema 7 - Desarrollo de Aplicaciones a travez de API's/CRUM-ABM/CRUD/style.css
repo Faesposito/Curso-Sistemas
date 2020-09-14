@@ -145,19 +145,10 @@ button:active {
 /************* Form Css ***************/
 
 
-/* #newUserModal {
-	display: none;
-}
 
-#editUserModal {
-	display: none;
-}
-
-#deleteUserModal {
-	display: none;
-}
- */
-#newUserModal {
+.deleteModalContainner,
+.newUserModalContainner,
+.editUserModalContainner {
 
 	display: none;
 	z-index: 100;
@@ -166,9 +157,32 @@ button:active {
 	position: fixed;
 	top: 50%;
 	left: 50%;
+
+}
+
+.deleteModalContainner {
+
+	margin-top: -13%;
+	margin-left: -15%;
+}
+
+.newUserModalContainner {
+
 	margin-top: -13%;
 	margin-left: -18%;
 
+}
+
+.editUserModalContainner {
+
+	margin-top: -13%;
+	margin-left: -15%;
+}
+
+.deleteModalContainner.active,
+.editUserModalContainner.active,
+.newUserModalContainner.active {
+	display: block;
 }
 
 .UserModal h1 {
@@ -181,7 +195,7 @@ button:active {
 	text-decoration: underline;
 }
 
-.signUpForm {
+.ModalForm {
 	float: left;
 	width: 100%;
 	height: 100%;
@@ -211,7 +225,7 @@ button:active {
 	border-color: #237375;
 }
 
-.signUpForm button {
+.ModalForm button {
 	margin-top: 25px;
 	width: 80%;
 	border: 0;

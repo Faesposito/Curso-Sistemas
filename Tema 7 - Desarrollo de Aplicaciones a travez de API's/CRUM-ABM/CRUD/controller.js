@@ -13,56 +13,40 @@ class UserViewController {
 		this.innerView = view;
 		this.innerModel = model;
 
+
 		this.innerModel.addEventListener('change', event => this.innerView.update());
 		this.innerView.update();
 
 	}
 
+	/*************** Modal Controls ********************/
+
+	activeModal(containner) {
+
+		containner.classList.add("active");
+		document.getElementById("ContainnerID").style.display = "none";
+		document.body.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+
+	}
+
+	removeActiveModal(containner) {
+
+		containner.classList.remove("active");
+		document.getElementById("ContainnerID").style.display = "block";
+		document.body.style.backgroundColor = "#1abc9c79";
+
+	}
+
+	/************ End Of Modal Controls ****************/
+
+
+	/****************** New User Modal ************************/
+
 	onNewUserButtonClick() {
 
-		this.innerView.modalSwitch();
+		const newUserModal = document.getElementById("newUserModal");
+		this.activeModal(newUserModal);
 
-	}
-
-	onEditButtonClick() {
-
-		//this.innerView.modalSwitch(event);
-
-		let userNameToEdit = window.prompt("Ingrese Username que desea Editar");
-
-		if (this.innerModel.isUsernameAlreadyExists(userNameToEdit)) {
-
-			let editedUserData = {
-				username: window.prompt("Ingrese Username para el nuevo usuario"),
-				name: window.prompt("Ingrese el Nombre del nuevo usuario"),
-				password: window.prompt("Ingrese el Password del nuevo usuario"),
-			};
-
-			this.innerModel.edit(userNameToEdit, editedUserData);
-
-		} else {
-			window.alert('El usuario que intenta editar no existe.');
-		}
-
-	}
-
-	onCloseModalClick() {
-
-		this.innerView.modalSwitch();
-
-	}
-
-	onDeleteButtonClick() {
-
-		let userNameToDelete = window.prompt('Ingrese username para eliminar');
-
-		if (this.innerModel.isUsernameAlreadyExists(userNameToDelete)) {
-			if (window.confirm('¿Está seguro de borrar el usuario?')) {
-				this.innerModel.delete(userNameToDelete);
-			}
-		} else {
-			window.alert('El usuario que intenta borrar no existe.');
-		}
 	}
 
 	onModalSubmitNewUserClick() {
@@ -82,6 +66,7 @@ class UserViewController {
 				name: formData.get('name'),
 				password: formData.get('password')
 			});
+			document.body.style.backgroundColor = "#1abc9c79";
 
 		} else {
 
@@ -92,21 +77,41 @@ class UserViewController {
 
 	}
 
+	onCloseNewUserModalClick() {
+
+		const newUserContainner = document.getElementById("newUserModal");
+		this.removeActiveModal(newUserContainner);
+
+	}
+
+	/*************** End Of New User Modal ********************/
+
+
+	/****************** Edit User Modal ************************/
+
+	onEditButtonClick() {
+
+		const editUserModal = document.getElementById("editUserModal");
+		this.activeModal(editUserModal);
+
+	}
+
 	onModalSubmitEditUserClick() {
 
 		let formData = new FormData(event.target);
 
-		let userNameToEdit = formData.userNameToEdit;
+		let userNameToEdit = formData.get('usernameToEdit');
 
 		if (this.innerModel.isUsernameAlreadyExists(userNameToEdit)) {
 
-			let editedUsedData = {
+			let editedUserData = {
 				username: formData.get('username'),
 				name: formData.get('name'),
 				password: formData.get('password')
 			}
 
 			this.innerModel.edit(userNameToEdit, editedUserData);
+			document.body.style.backgroundColor = "#1abc9c79";
 
 		} else {
 			window.alert('El usuario que intenta editar no existe.');
@@ -114,6 +119,52 @@ class UserViewController {
 		}
 
 	}
+
+	onCloseEditUserModalClick() {
+
+		const editUserContainner = document.getElementById("editUserModal");
+		this.removeActiveModal(editUserContainner);
+	}
+
+	/*************** End Of Edit User Modal ********************/
+
+
+	/****************** Delete User Modal ************************/
+
+	onDeleteButtonClick() {
+
+		const deleteUserModal = document.getElementById("deleteUserModal");
+		this.activeModal(deleteUserModal);
+
+	}
+
+	onModalSubmitDeleteUserClick() {
+
+		let formData = new FormData(event.target);
+
+		let userNameToDelete = formData.get('usernameToDelete');
+
+		if (this.innerModel.isUsernameAlreadyExists(userNameToDelete)) {
+			if (window.confirm('¿Está seguro de borrar el usuario?')) {
+				this.innerModel.delete(userNameToDelete);
+			}
+			document.body.style.backgroundColor = "#1abc9c79";
+		} else {
+			window.alert('El usuario que intenta borrar no existe.');
+			event.preventDefault();
+		}
+	}
+
+	onCloseDeleteUserModalClick() {
+
+		const deleteUserContainner = document.getElementById("deleteUserModal");
+		this.removeActiveModal(deleteUserContainner);
+
+	}
+
+	/*************** End Of Delete User Modal ********************/
+
+
 }
 
 export {
