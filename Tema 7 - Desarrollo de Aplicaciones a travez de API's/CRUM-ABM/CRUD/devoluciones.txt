@@ -1,0 +1,72 @@
+Hola Franco, antes que nada, excelente trabajo!!!
+
+Te hago algunas devoluciones:
+=============================
+
+En el archivo view.js:
+
+Tenés estos controladores asignados:
+
+    document.getElementById("newUserCloseModal").addEventListener("click", (event) => this.innerController.onCloseNewUserModalClick(event));
+    document.getElementById("editUserCloseModal").addEventListener("click", (event) => this.innerController.onCloseEditUserModalClick(event));
+    document.getElementById("deleteUserCloseModal").addEventListener("click", (event) => this.innerController.onCloseDeleteUserModalClick(event));
+    document.querySelector('form#signUpForm').addEventListener('submit', (event) => this.innerController.onModalSubmitNewUserClick(event));
+    document.querySelector('form#editUserForm').addEventListener('submit', (event) => this.innerController.onModalSubmitEditUserClick(event));
+    document.querySelector('form#deleteUserForm').addEventListener('submit', (event) => this.innerController.onModalSubmitDeleteUserClick(event));
+
+Estos: newUserCloseModal, editUserCloseModal, deleteUserCloseModal.. tienen que estar construídos con el ID base. Tal como: 
+document.getElementById(`${this.id}btnNewUser`).addEventListener("click", (event) => this.innerController.onNewUserButtonClick(event));
+
+Porque, si vos incrustás 2 ABM en una misma vista. Te colisionan los ID's de ambos componentes. En este caso no va a fallar porque hay solo 1 ABM en la página.
+
+----------------------------
+
+La forma de generar los modales está bien, es la forma esperada para este nivel!!
+Básicamente meter más código HTML pero ocultado, y que se haga visible por acción del controlador en respuesta a los eventos!
+Esto lo implementaste 10 puntos.
+
+Otra manera de implementarlo es agregar funciones a la vista, donde se piden los diálogos modales, ejemplo:
+
+view.getNewUserDialog() --> el HTML resultante 
+
+y otra función para lanzar los modales:
+
+view.showModal( )
+view.hideModal( )
+
+De manera tal que el controlador pueda utilizar estas funciones de la vista de esta manera:
+
+onNewUserClick()
+{
+   view.showModal( view.getNewUserDialog() );
+
+};
+
+Es solo otra estrategia!
+
+Como habrás notado, tenés más funciones en el controlador para la cuestión de la apertura y cierre de los modales.
+Esas funciones surgen por una cuestión de la delegación completa del manejo de eventos de la vista al controlador.
+En realidad si uno hace un análisis más fino, podría hacer una identificación de los eventos que son realmente propios de la vista, y de aquellos eventos
+que dispara la vista, pero que necesitan de una delegación externa para poder resolverse.
+Pero es un análisis más profundo para otro momento. 
+
+Esto te lo demuestra:
+
+removeActiveModal(containner) {
+
+		containner.classList.remove("active");
+		document.getElementById("ContainnerID").style.display = "block";
+		document.body.style.backgroundColor = "#1abc9c79";
+
+	}
+
+Donde en el controlador estás escribiendo código de la vista. Esto no debería realizarse si tenemos bien separadas las responsabilidades.
+Esa partecita de código es código puro de vista.
+
+OJO: Está perfecto lo que hiciste, son solo cuestiones para debatir!!!
+
+----------------------------
+
+
+
+
