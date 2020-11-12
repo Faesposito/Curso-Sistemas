@@ -19,6 +19,10 @@ function createNewProductDataForm(defaultValues )
 		<input type="text" name="quantity" placeholder='Quantity: Cantidad a Ingresar' value="${defaultValues.quantity}" />
 		<input type="text" name="description" placeholder='Description: Cantidad a Ingresar' value="${defaultValues.description}" />
 	</form>
+	<form id="newProductImageForm" enctype="multipart/form-data" method="POST">
+		<input type="text" name="name" placeholder='Image Name: Ingresa el mismo nombre del Producto' value="${defaultValues.name}"/>
+		<input type="file" name="image">
+	</form>
 	`;
 	return innerHTML;
 }
@@ -98,7 +102,6 @@ class ProductView {
 		document.body.style.backgroundColor = "white";
 	}
 /********************************************************************************/
-
 	isStockEmpty(productArray) {
 
 		for( let product of productArray ) {
@@ -131,7 +134,7 @@ class ProductView {
 					innerHTML += 
 					`<div id="product-card${productArray.indexOf(product)}" class="product-card">
 						<div class="product-img">
-							<img src="./Jack-Daniels.webp" alt="Jack Daniel's">
+							<img src="./Product/resource/${product.name}.jpg" alt="Jack Daniel's">
 						</div>
 						<div class="product-details">
 							<span id="product-category${productArray.indexOf(product)}" class="product-category">${product.category}</span>

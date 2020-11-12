@@ -18,27 +18,25 @@ class LoginView extends EventTarget
 
 		this.innerController = new LoginViewController(model, this);
 
-		this.show();
-
-		
+		this.show();	
 	}
 
 	show()
 	{
 		let innerHTML = 
-		`<div class="w3-container">  
-      		<div class="w3-center"><br>
-        		<img src="./avatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+		`<div class="">  
+      		<div class=""><br>
+        		<img src="./Login/resource/avatar.png" alt="Avatar" style="width:30%" class="">
       		</div>
 
-			<form id="${this.id}loginFrm" class="w3-container">
+			<form id="${this.id}loginFrm" class="">
 				<div class="w3-section">
 					<label><b>Username</b></label>
-					<input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="username" required>
+					<input class="" type="text" placeholder="Enter Username" name="username" required>
 					<label><b>Password</b></label>
-					<input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" required>
-					<button id="${this.id}btnLogin" class="w3-button w3-block w3-green w3-section w3-padding">Login</button>
-					<button id="${this.id}btnRegister" class="w3-button w3-block w3-green w3-section w3-padding">Register</button>
+					<input class="" type="password" placeholder="Enter Password" name="password" required>
+					<button id="${this.id}btnLogin" class="">Login</button>
+					<button id="${this.id}btnRegister" class="">Register</button>
 				</div>
 			</form>
 		</div>`;

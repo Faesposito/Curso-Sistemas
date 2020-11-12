@@ -45,7 +45,7 @@ class ShoppingCartModel extends EventTarget {
 			body: data
 		};
 
-		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	deleteProductFromCart(productDataName) {
@@ -76,7 +76,7 @@ class ShoppingCartModel extends EventTarget {
 				name : products.name,
 				category : products.category ,
 				price : products.price,
-				quantity : stockAvailable - products.quantity,
+				quantity :  Number(stockAvailable) - Number(products.quantity),
 				description : products.description,
 			}	
 			this.edit(data);

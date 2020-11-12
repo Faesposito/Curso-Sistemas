@@ -2,7 +2,6 @@
 	//Inicio de sesión (Persistencia de datos en diferentes ejecuciones)
 	session_start();
 
-	//Conexión al motor de Bases de Datos
 	$connection = null;
 	
 	//Ejecutando la conexión en un bloque protegido. En caso de falla X al conectar, se atrapa la excepción
@@ -10,27 +9,20 @@
 	{
 		$connection = new PDO('mysql:host=127.0.0.1:3306;dbname=product-app', 'root', 'Faespo1493' );
 		
-		//Determinamos que en caso de errores (desde la base de datos), se reflejen como excepciones.
 		$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	catch (PDOException $connectionException) 
 	{
-		//Contestamos al cliente que su petición no se puede efectuar por un problema
 		$status = array( status=>'error', description=>$connectionException->getMessage() );
 	    echo json_encode($status);
 
-	    //Cortamos la ejecución del programa del servidor de forma forzada
 	    die();
 	};
 
-	//Si no hubo problemas, obtenemos el cuerpo de la petición del cliente.
-	//Pactamos que el intercambio es vía texto en formato JSON
 	$json_body = file_get_contents('php://input');
 
-	//Transformamos texto JSON en objeto PHP para poder manipularlo con el lenguaje
 	$object = json_decode($json_body);
 
-	//Tomamos la información necesaria del objeto recibido
 	$key = $object->key;
 	$action = $object->action;
 	$data = $object->body;

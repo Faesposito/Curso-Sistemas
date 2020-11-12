@@ -19,7 +19,7 @@ class ProductRemoteModel extends EventTarget {
 			action:'create',
 			body: productData
 		};
-		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	}
 
 	edit( productEditedData ) {
@@ -30,7 +30,7 @@ class ProductRemoteModel extends EventTarget {
 			body: productEditedData
 		};
 
-		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	delete( productDataName ) {
@@ -41,7 +41,7 @@ class ProductRemoteModel extends EventTarget {
 			body: { name:productDataName }
 		};
 
-		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	getAll() {
@@ -52,7 +52,7 @@ class ProductRemoteModel extends EventTarget {
 			body: null
 		};
 
-		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	isValidProductData( productData ) {

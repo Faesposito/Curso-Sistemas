@@ -8,7 +8,7 @@
 
 class ShoppingCartController {
 
-	constructor(model, view) {
+	constructor(model, view ) {
 
 		this.innerView = view;
 		this.innerModel = model;
@@ -49,6 +49,7 @@ class ShoppingCartController {
 
 		this.innerModel.buyProductsInCart();
 		this.innerView.showCart();
+
 	}
 }
 

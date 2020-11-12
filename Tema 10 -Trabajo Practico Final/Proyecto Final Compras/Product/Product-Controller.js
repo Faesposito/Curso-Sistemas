@@ -44,6 +44,8 @@ class ProductController {
 			let formViewData = new FormData( document.getElementById("newProductForm") );
 			let formProductData = Object.fromEntries(formViewData);
 
+			this.upload(new FormData( document.getElementById("newProductImageForm")));
+
 			let success = true;
 
 			if ( !this.innerModel.isValidProductData( formProductData )) {
@@ -72,8 +74,16 @@ class ProductController {
 			}		
 		});
 
+		
 		this.innerView.closeProductModal();
 		
+	}
+
+	upload(input){
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "./Product/upload.php", true);
+		xhr.send(input);
 	}
 
 	/********************* End of New Product Events *****************************/
