@@ -27,7 +27,10 @@ class ApplicationView {
 		this.innerController = new ApplicationController(model, this);
 		
 		this.shoppingCartController = '';
-		this.navbarButtonArray = new Array();
+		
+		this.productView = '';
+
+		//this.navbarButtonArray = new Array();
 
 		this.show();		
 	}
@@ -44,10 +47,10 @@ class ApplicationView {
 	normal() {
 
 		this.clear();
-		this.navbar();
+		//this.navbar();
 		this.sidebar();
 		this.body();
-		this.footer();
+		//this.footer();
 	}
 
 	login() {
@@ -64,6 +67,8 @@ class ApplicationView {
 
 		let productModel = new ProductRemoteModel();
 		let productView = new ProductView('body', productModel);
+
+		this.productView = productView;
 
 		productView.update();
 	}
@@ -99,11 +104,14 @@ class ApplicationView {
 
 	show() {
 		
-		this.login();
+		//this.login();
+		this.normal();
 
 		document.getElementById(this.id).addEventListener('click', event =>
 			{
 				if (event.target.classList.contains("addToCart")) this.shoppingCartController.onAddToCartButtonClick(event);
+				// solucion momentanea...
+				if (event.target.classList.contains("buyButton")) this.normal();
 			});
 	}
 	

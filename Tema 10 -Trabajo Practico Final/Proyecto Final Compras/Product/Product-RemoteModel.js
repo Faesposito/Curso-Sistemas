@@ -19,17 +19,18 @@ class ProductRemoteModel extends EventTarget {
 			action:'create',
 			body: productData
 		};
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	}
 
-	edit( editedProductData ) {
+	edit( productEditedData ) {
 
-		let message = {
-			
+		let message =
+		{
 			action:'edit',
-			body: editedProductData
+			body: productEditedData
 		};
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
+
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	delete( productDataName ) {
@@ -40,18 +41,7 @@ class ProductRemoteModel extends EventTarget {
 			body: { name:productDataName }
 		};
 
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
-	};
-
-	getByProductName( productDataName ) {
-
-		let message = {
-
-			action:'getByProductName',
-			body: productDataName
-		};
-
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	getAll() {
@@ -62,32 +52,47 @@ class ProductRemoteModel extends EventTarget {
 			body: null
 		};
 
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
-	};
-
-	isProductAlredyCreated( productDataName ) {
-
-		let message = {
-
-			action:'isProductAlredyCreated',
-			body: { name:productDataName }
-		};
-
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	isValidProductData( productData ) {
 
 		let success = true;
 
-		success = ( success && productData.hasOwnProperty('name') && productData.name != null );
-		success = ( success && productData.hasOwnProperty('category') && productData.category != null );
+		console.log(productData);
+		success = ( success && productData.hasOwnProperty('name') && productData.name != null && productData.name != '');
+		success = ( success && productData.hasOwnProperty('category') && productData.category != null && productData.category != '' );
 		success = ( success && productData.hasOwnProperty('price') && productData.price != null && productData.price > 0);
-		success = ( success && productData.hasOwnProperty('quantity') && productData.quantity != null && productData.quantity > 0);
-		success = ( success && productData.hasOwnProperty('description') && productData.description != null );
+		success = ( success && productData.hasOwnProperty('quantity') && productData.quantity != null && productData.quantity >= 0);
+		success = ( success && productData.hasOwnProperty('description') && productData.description != null && productData.description != '' );
 
 		return success;
 	};
+
+	/* getByProductId( productDataName ) {
+
+		let message = {
+
+			action:'getByProductId',
+			body: productDataName
+		};
+
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+	}; 
+
+	isProductAlredyCreated( productDataName ) {
+
+		let message = {
+
+			action:'isProductAlredyCreated',
+			body: { name: productDataName }
+		};
+
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+	};
+
+	 */
+
 }
 
 export { ProductRemoteModel };

@@ -12,16 +12,40 @@ class ShoppingCartModel extends EventTarget {
 
 		super();
 		this.innerData = new Array();
+		this.stockAvailable = new Array();
 	};
 
-	addProductToCart(userData) {
-	
-		this.innerData.push(userData);
+	addProductToCart(productData) {
+		
+		if (!this.isProductAlredyinCart(productData)) {
+			this.innerData.push(productData);
+		}	
 		this.dispatchEvent(new CustomEvent("change"));
 	}
 
-	edit() {
-		this.dispatchEvent(new CustomEvent("change"));
+	isProductAlredyinCart(productData) {
+
+		if (this.innerData != null) {
+
+			let index = this.innerData.findIndex(product => product.id === productData.id);
+
+			if (index >= 0) {
+				this.innerData[index].quantity = Number(this.innerData[index].quantity) + Number(productData.quantity) ;
+				return true;
+			}
+			return false;
+		} 				
+	}
+
+	edit(data) {
+
+		let message =
+		{
+			action:'edit',
+			body: data
+		};
+
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
 	deleteProductFromCart(productDataName) {
@@ -34,20 +58,31 @@ class ShoppingCartModel extends EventTarget {
 		}
 	};
 
+	cleanCart() {
+
+		this.innerData = [];
+		this.stockAvailable = [];
+	}
+
 	buyProductsInCart() {
 		
-		let data = [];
+		let data = {};
 
-		for (const products of this.innerData) {
+		for (let products of this.innerData) {
+			
+			let stockAvailable = this.getStock(products.id);
 			data = {
+				id : products.id,
 				name : products.name,
 				category : products.category ,
-				price : Number(products.price) * Number(products.quantity),
-				quantity : products.quantity,
+				price : products.price,
+				quantity : stockAvailable - products.quantity,
 				description : products.description,
 			}	
+			this.edit(data);
 		}
 
+		this.cleanCart();
 		this.dispatchEvent(new CustomEvent("change"));
 	}; 
 
@@ -55,11 +90,15 @@ class ShoppingCartModel extends EventTarget {
 	getAll() {
 
 		return this.innerData;
+	}
 
+	getStock(productId) {
+	
+		let index = this.innerData.findIndex(product => product.id === productId);
+
+		return this.stockAvailable[index].stockAvailable;
 	}
 };
 
 
-export {
-	ShoppingCartModel
-};
+export { ShoppingCartModel };

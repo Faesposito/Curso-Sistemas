@@ -5,9 +5,7 @@
 	https://educacion.batan.coop/course/view.php?id=9
 */
 
-import {
-  ShoppingCartController
-} from "./shoppingCartController.js"
+import { ShoppingCartController } from "./shoppingCartController.js"
 
 class ShoppingCartView {
 
@@ -38,7 +36,10 @@ class ShoppingCartView {
          `;
 
     let cartArray = this.innerModel.getAll();
-    let totalPrice = 0;
+    
+    let totalPrice = 0; 
+    let productCounter = 0;
+
     if (cartArray.length > 0) {
 
       for (let product of cartArray) {
@@ -55,6 +56,7 @@ class ShoppingCartView {
             </td>
           <tr>`;
         totalPrice += Number(product.price)*Number(product.quantity);
+        productCounter++;
       }
 
     } else {
@@ -67,6 +69,7 @@ class ShoppingCartView {
     </table>
         <div class="product-cart">
         <h1>${totalPrice} </h1>
+        <h6>${productCounter} </h1>
         <button id="buyButton" class="buyButton" type="submit">Comprar</button>
         </div>
       </div>
@@ -77,15 +80,12 @@ class ShoppingCartView {
 
     document.getElementById('buyButton').addEventListener('click', event => this.innerController.onBuyProductButtonClick(event) );
     
-     document.getElementById('ShoppingCart').addEventListener('click', event =>
-			{
-				if ( event.target.classList.contains('deleteProductFromCart') )
-					this.innerController.onDeleteFromCartButtonClick(event);
+     document.getElementById('ShoppingCart').addEventListener('click', event => {
+
+				if ( event.target.classList.contains('deleteProductFromCart') ) this.innerController.onDeleteFromCartButtonClick(event);
 			}); 
   }
 
 }
 
-export {
-  ShoppingCartView
-};
+export { ShoppingCartView };

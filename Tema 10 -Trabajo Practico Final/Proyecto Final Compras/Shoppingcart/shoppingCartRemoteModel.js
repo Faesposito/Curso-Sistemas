@@ -46,11 +46,11 @@ class ShoppingCartRemoteModel extends EventTarget {
 
 		let message =
 		{
-			action:'buyProductsInCart',
+			action:'edit',
 			body: { productDataName }
 		};
 
-		return fetch( './Product.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	}
 
 	getAll() {

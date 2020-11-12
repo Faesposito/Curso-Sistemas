@@ -31,7 +31,8 @@ class ProductModel extends EventTarget
 		let index = this.innerData.findIndex( product => product.name === nameToEdit );
 
 		if ( index >= 0 && this.isValidProductData(newProductData)) {
-
+			
+			Object.assign(this.innerData[index], newProductData);
 			this.dispatchEvent( new CustomEvent("change") );
 		}
 	};
@@ -47,30 +48,11 @@ class ProductModel extends EventTarget
 		}
 	};
 
-	getByProductName( nameToFind ) {
-
-		if ( typeof(nameToFind) === "string" ) {
-
-			let index = this.innerData.findIndex( product => product.name === nameToFind );
-
-			return ( index >= 0 )? this.innerData[index] : null;
-		}
-		else {
-
-			return null;
-		}
-	};
- 
 	getAll() {
 
 		return this.innerData;
 	};
 
-	isProductAlredyCreated( nameToFind ) {
-
-		return ( this.getByProductName( nameToFind ) == null )? false : true;
-	};
- 
 	isValidProductData( productData ) {
 
 		let success = true;
@@ -83,6 +65,24 @@ class ProductModel extends EventTarget
 
 		return success;
 	};
+	
+	/* getByProductName( nameToFind ) {
+
+		if ( typeof(nameToFind) === "string" ) {
+
+			let index = this.innerData.findIndex( product => product.name === nameToFind );
+			return ( index >= 0 )? this.innerData[index] : null;
+		}
+		else {
+
+			return null;
+		}
+	};
+ 
+	isProductAlredyCreated( nameToFind ) {
+
+		return ( this.getByProductName( nameToFind ) == null )? false : true;
+	}; */	
 
 };
 

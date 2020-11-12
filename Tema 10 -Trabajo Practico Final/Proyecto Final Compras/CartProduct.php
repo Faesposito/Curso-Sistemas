@@ -46,8 +46,8 @@
 	function buyProductsInCart($connection, $data) {
 		
 		$SQLCode = "UPDATE product
-					SET price='$data->price'
-					WHERE name='$data->name'";
+					SET quantity='$data->quantity'
+					WHERE id='$data->id'";
 		$connection->query($SQLCode);
 	}; 
 

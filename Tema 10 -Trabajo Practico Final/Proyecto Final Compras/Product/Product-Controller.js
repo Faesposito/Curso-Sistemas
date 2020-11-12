@@ -12,7 +12,13 @@ class ProductController {
 		this.innerView = view;
 		this.innerModel = model;
 	}
-	
+
+	/* onBuyProductButtonClick() {
+
+		this.innerView.update();
+
+	} */
+
 	oncloseProductModalButtonClick() {
 
 		this.innerView.closeProductModal();
@@ -28,32 +34,49 @@ class ProductController {
 
 	onNewProductConfirmButtonClick() {
 
-	
-		let formViewData = new FormData( document.getElementById("newProductForm") );
-		let formProductData = Object.fromEntries(formViewData);
+		this.innerModel.getAll().then( response => this.newProduct(response.json()) );
+	}
 
-		let success = true;
+	newProduct(dataResponse) {
 
-		if ( !this.innerModel.isValidProductData( formProductData ) ) {
+		dataResponse.then( productArray => {
 
-			window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
-			success = false;
-		}
+			let formViewData = new FormData( document.getElementById("newProductForm") );
+			let formProductData = Object.fromEntries(formViewData);
 
-		if ( success ) {
+			let success = true;
 
-			this.innerModel.create( formProductData )
-			.then( response => response.json() )
-			.then( response => {if ( response != null && response.hasOwnProperty('status') ) window.alert("ServerError: " + response.description )} )
-			.then( () => this.innerView.update() );
-		}
-		
+			if ( !this.innerModel.isValidProductData( formProductData )) {
+
+				window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
+				success = false;
+			}
+
+			if ( success ) {
+
+				for( let product of productArray ) {
+
+					if(formProductData.name === product.name) {
+						window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
+						success = false;
+					}	
+				}	
+			}
+
+			if ( success ) {
+
+				this.innerModel.create( formProductData )
+				.then( response => response.json() )
+				.then( response => {if ( response != null && response.hasOwnProperty('status') ) window.alert("ServerError: " + response.description )} )
+				.then( () => this.innerView.update() );
+			}		
+		});
+
 		this.innerView.closeProductModal();
 		
 	}
 
 	/********************* End of New Product Events *****************************/
-
 
 	/********************* Start of Edit Product Events **************************/
 
@@ -65,39 +88,61 @@ class ProductController {
 
 	onEditProductConfirmButtonClick() {
 
+		this.innerModel.getAll().then( response => this.editProduct(response.json()) );
+	}
+
+	editProduct( dataResponse ) {
+
+		dataResponse.then( productArray => {
+
 		let formViewData = new FormData( document.getElementById("editProductForm") );
-		let formProductData = Object.fromEntries(formViewData);
-		let formProductNameToEdit =  formViewData.get('productToEditName');
-		let success = true;
-
-		if ( !this.innerModel.isValidProductData( formProductData )) {
-			
-			window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
-			success = false;
-		}
-
-		console.log(success);
-		if ( success ) {
-
-			let editedUserData = {
-
+		
+		let productEditedData = {
+				id : 0,
 				name: formViewData.get('name'),
 				category: formViewData.get('category'),
 				price: formViewData.get('price'),
 				quantity: formViewData.get('quantity'),
-				description: formViewData.get('description')
-			}
+				description : formViewData.get('description')
+		}
+		
+		let productNameToEdit = formViewData.get('productToEditName');
+		
+		let success = true;
 
-			this.innerModel.edit( formProductNameToEdit, editedUserData )
+		if ( !this.innerModel.isValidProductData( productEditedData ))
+		{
+			window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
+			success = false;
+		}
+
+		if ( success ) {
+
+			for( let product of productArray ) {
+
+				if(productNameToEdit === product.name) {
+					productEditedData.id = product.id;
+				}	
+			}
+			if ( productEditedData.id === 0) {
+
+				window.alert("ClientError: El Producto no Existe.");
+				success = false;
+			}	
+		}
+		
+		if ( success ) {
+
+			this.innerModel.edit( productEditedData )
 			.then( response => response.json() )
 			.then( response => {if ( response != null && response.hasOwnProperty('status') ) window.alert("ServerError: " + response.description )} )
 			.then( () => this.innerView.update() );
 		}
-		
+		 
 		this.innerView.closeProductModal();
-
+		
+		});
 	}
-
 	/********************** End of Edit Product Events ***************************/
 
 

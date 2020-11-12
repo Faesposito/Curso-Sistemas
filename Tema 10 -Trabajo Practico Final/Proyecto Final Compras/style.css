@@ -11,6 +11,9 @@ input[type=number]::-webkit-inner-spin-button {
     opacity: 1;
 }
 
+button:disabled {
+	color: red;
+}
 .product-card {
     width: 300px;
     position: relative;

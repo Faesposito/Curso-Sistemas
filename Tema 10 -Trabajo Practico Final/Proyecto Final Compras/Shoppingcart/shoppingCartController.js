@@ -20,14 +20,22 @@ class ShoppingCartController {
 	onAddToCartButtonClick()
 	{
 		let id = event.srcElement.id.slice(15);
-		let cartData = {
+
+		let cartProductStock = {
+			id : document.getElementById('product-id' + id).innerHTML ,
+			stockAvailable : document.getElementById('product-quantity' + id).getAttribute('max')
+		}
+
+		let cartProductData = {
+			id : document.getElementById('product-id' + id).innerHTML ,
 			name : document.getElementById('product-name' + id).innerHTML,
 			category : document.getElementById('product-category' + id).innerHTML ,
 			price : document.getElementById('product-price' + id).innerHTML,
 			quantity : document.getElementById('product-quantity' + id).value,
 			description : document.getElementById('product-description' + id).innerHTML,
 		}
-		this.innerModel.addProductToCart(cartData);
+		this.innerModel.stockAvailable.push(cartProductStock);
+		this.innerModel.addProductToCart(cartProductData, cartProductStock);
 	}
 
 	onDeleteFromCartButtonClick()
@@ -39,12 +47,9 @@ class ShoppingCartController {
 
 	onBuyProductButtonClick() {
 
-		//let data = this.innerModel.getAll();
 		this.innerModel.buyProductsInCart();
-
+		this.innerView.showCart();
 	}
 }
 
-export {
-	ShoppingCartController
-};
+export { ShoppingCartController };

@@ -6,7 +6,6 @@
 */
 
 import { ProductController } from "./Product-Controller.js"
-//import { ShoppingCartController } from "../Shoppingcart/shoppingCartController.js"
 
 /**************************** Product Modal Forms ****************************/
 function createNewProductDataForm(defaultValues )
@@ -71,7 +70,6 @@ class ProductView {
 		};
 
 	}
-
 /**************************** Product Modal Controls ****************************/
 	openProductModal(openModal) {
 
@@ -101,6 +99,18 @@ class ProductView {
 	}
 /********************************************************************************/
 
+	isStockEmpty(productArray) {
+
+		for( let product of productArray ) {
+
+			if(product.quantity == '0') {
+			
+				let html = `
+				<button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart" type="submit" disabled>Out of Stock</button>`
+				document.getElementById('product-cart' + productArray.indexOf(product)).innerHTML = html;		
+			}
+		}
+	}
 /**************************** Product Update Methods ****************************/
 	update() {
 
@@ -125,15 +135,16 @@ class ProductView {
 						</div>
 						<div class="product-details">
 							<span id="product-category${productArray.indexOf(product)}" class="product-category">${product.category}</span>
+							<p id="product-id${productArray.indexOf(product)}" class="product-id">${product.id}</p>
 							<h3 id="product-name${productArray.indexOf(product)}" class="product-name">${product.name}</h3>
 							<p id="product-description${productArray.indexOf(product)}" class="product-description">${product.description}</p>
 							<div class="product-bottom-details">
 								<div id="product-price${productArray.indexOf(product)}" class="product-price">${product.price}</div>
 								<div class="product-quantity">
 									<div>
-										<input type="number" id="product-quantity${productArray.indexOf(product)}" name="quantity" min="1" max="${product.quantity}" value="1">
+										<input type="number" id="product-quantity${productArray.indexOf(product)}" name="quantity" min="0" max="${product.quantity}" value="0">
 									</div>
-									<div class="product-cart">
+									<div id="product-cart${productArray.indexOf(product)}" class="product-cart">
 										<button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart" type="submit">Add to Cart</button>
 									</div>
 								</div> 
@@ -187,6 +198,8 @@ class ProductView {
 
 			document.getElementById( this.id ).innerHTML = innerHTML;
 
+			this.isStockEmpty(productArray);
+
 			document.getElementById( this.id + 'NewProductButton').addEventListener('click', event => this.innerController.onNewProductButtonClick(event) );
 			document.getElementById( this.id + 'EditProductButton').addEventListener('click', event => this.innerController.onEditProductButtonClick(event) );
 			document.getElementById( this.id + 'DeleteProductButton').addEventListener('click', event => this.innerController.onDeleteProductButtonClick(event) );
@@ -194,7 +207,6 @@ class ProductView {
 			document.getElementById(this.id).addEventListener('click', event =>
 			{
 				if (event.target.classList.contains("closeModalButton")) this.innerController.oncloseProductModalButtonClick(event);
-				//if (event.target.classList.contains("addToCart")) this.shoppingCartController.onAddToCartButtonClick(event);
 			});
 
 			document.getElementById( this.id + 'submitNewProductForm').addEventListener('click', event => this.innerController.onNewProductConfirmButtonClick(event) );

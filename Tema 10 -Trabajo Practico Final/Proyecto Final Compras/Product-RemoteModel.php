@@ -26,7 +26,7 @@
 
 	function create( $connection, $data ) {
 
-		if ( isValidProductData( $data ) && !isProductAlredyCreated($connection, $data)) {
+		if ( isValidProductData( $data )) {
 
 			try {
 
@@ -48,7 +48,7 @@
 
 		$SQLCode = "UPDATE product
 					SET name='$data->name', category='$data->category',	price='$data->price', quantity='$data->quantity',description='$data->description'
-					WHERE name='$data->name2'";
+					WHERE id='$data->id'";
 		$connection->query($SQLCode);
 	};
 
@@ -59,15 +59,6 @@
 		$connection->query($SQLCode);
 	};
 	
-	function getByProductName( $connection, $data ) {
-
-		$SQLCode = "SELECT * FROM product WHERE name='$data->name'";
-
-		$result = $connection->query($SQLCode)->fetchAll();
-
-		return $result;
-	};
-
 	function getAll($connection) {
 
 		$SQLCode = "SELECT * FROM product ORDER BY name ASC LIMIT 1000";
@@ -77,29 +68,41 @@
 		return $result;
 	};
 
-	function isProductAlredyCreated( $connection, $data ) {
-
-		if ( empty( getByProductName($connection, $data) ) )
-			return false;
-		else
-			return true;
-	};
-
-	function isValidProductData( $userData ) {
+	function isValidProductData( $productData ) {
 
 		$success = true;
 
-		$success = ( $success && array_key_exists('name', $userData ) && !is_null( $userData->name ) );
-		$success = ( $success && array_key_exists('category', $userData ) && !is_null( $userData->category ) );
-		$success = ( $success && array_key_exists('price', $userData ) && !is_null( $userData->price ) );
-		$success = ( $success && array_key_exists('quantity', $userData ) && !is_null( $userData->quantity ) );
-		$success = ( $success && array_key_exists('description', $userData ) && !is_null( $userData->description ) );
+		$success = ( $success && array_key_exists('name', $productData ) && !is_null( $productData->name ) );
+		$success = ( $success && array_key_exists('category', $productData ) && !is_null( $productData->category ) );
+		$success = ( $success && array_key_exists('price', $productData ) && !is_null( $productData->price ) );
+		$success = ( $success && array_key_exists('quantity', $productData ) && !is_null( $productData->quantity ) );
+		$success = ( $success && array_key_exists('description', $productData ) && !is_null( $productData->description ) );
 
 		return success;	
 	};
 
+	/* 
+ 
+	function getByProductName( $connection, $data ) {
 
-	/*La siguiente línea tiene mucho significado:
+		$SQLCode = "SELECT * FROM product WHERE name='$data->name'";
+
+		$result = $connection->query($SQLCode)->fetchAll();
+
+		return $result;
+	}; 
+
+	function isProductAlredyCreated( $connection, $data ) {
+
+		$SQLCode = "SELECT * FROM product WHERE name='$data->name'";
+
+		$result = $connection->query($SQLCode)->fetchAll();
+
+		return $result;
+	};
+
+
+	La siguiente línea tiene mucho significado:
 	"Ejecuta la función correspondiente al nombre de acción enviado por el cliente, le suministra
 	el argumento basado en el cuerpo del mensaje recibido en la petición, y a la respuesta la codifica
 	en texto formato JSON e imprime este texto como respuesta al cliente"
