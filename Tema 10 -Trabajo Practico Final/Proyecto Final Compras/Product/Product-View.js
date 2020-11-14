@@ -38,6 +38,10 @@ function editProductDataForm(defaultValues)
 		<input type="text" name="quantity" placeholder='Quantity: Cantidad a Ingresar' value="${defaultValues.quantity}" />
 		<input type="text" name="description" placeholder='Description: Cantidad a Ingresar' value="${defaultValues.description}" />
 	</form>
+	<form id="editProductImageForm" enctype="multipart/form-data" method="POST">
+		<input type="text" name="name" placeholder='Image Name: Ingresa el mismo nombre del Producto' value="${defaultValues.name}"/>
+		<input type="file" name="image">
+	</form>
 	`;
 	return innerHTML;
 }
@@ -55,8 +59,8 @@ function deleteProductDataForm()
 
 class ProductView {
 
-	constructor( id, model )
-	{
+	constructor( id, model, isAdmin ) {
+		
 		this.id = id;
 		this.innerModel = model;
 
@@ -64,8 +68,10 @@ class ProductView {
 
 		this.update();
 
-		this.productDefaultData =
-		{
+		this.isAdmin = isAdmin;
+
+		this.productDefaultData = {
+
 			name:'Jack Daniels',
 			category:"Whisky",
 			price:'100',
@@ -73,25 +79,26 @@ class ProductView {
 			description:'un Whisky de los mejores que hay.'
 		};
 
+		
 	}
 /**************************** Product Modal Controls ****************************/
-	openProductModal(openModal) {
+	openProductModal(data) {
 
-		if (openModal === 'newProductModal') {
-			document.getElementById("Containner").style.display = "none";
+		if (data === 'newProductModal') {
+
 			document.getElementById('newProductModal').style.display='block';
-			document.body.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
 		}
-		if (openModal === 'editProductModal') {
-			document.getElementById("Containner").style.display = "none";
+		if (data === 'editProductModal') {
+
 			document.getElementById('editProductModal').style.display='block';
-			document.body.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
 		}
-		if (openModal === 'deleteProductModal') {
-			document.getElementById("Containner").style.display = "none";
+		if (data === 'deleteProductModal') {
+
 			document.getElementById('deleteProductModal').style.display='block';
-			document.body.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
 		}
+		
+		document.getElementById("Containner").style.display = "none";
+		document.body.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
 	}
 	closeProductModal() {
 
@@ -118,8 +125,9 @@ class ProductView {
 	update() {
 
 		this.innerModel.getAll().then( response => this.updateFrom(response.json()) );		
-	}		
-	updateFrom( productPromise ) {
+	}	
+		
+	updateFrom( productPromise) {
 
 		productPromise.then( productArray => {
 
@@ -145,7 +153,7 @@ class ProductView {
 								<div id="product-price${productArray.indexOf(product)}" class="product-price">${product.price}</div>
 								<div class="product-quantity">
 									<div>
-										<input type="number" id="product-quantity${productArray.indexOf(product)}" name="quantity" min="0" max="${product.quantity}" value="0">
+										<input type="number" id="product-quantity${productArray.indexOf(product)}" name="quantity" min="0" max="${product.quantity}" value="1">
 									</div>
 									<div id="product-cart${productArray.indexOf(product)}" class="product-cart">
 										<button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart" type="submit">Add to Cart</button>
@@ -163,6 +171,8 @@ class ProductView {
 							</div>`;
 			};
 
+			if (this.isAdmin) {
+				
 			innerHTML += 
 			`
 			</div class="ButtonContainner">
@@ -197,12 +207,16 @@ class ProductView {
 				</div>
 			</div>`;
 
+			}
+			
 			/***********************************     Event Listeners      ********************************************************/
 
 			document.getElementById( this.id ).innerHTML = innerHTML;
 
 			this.isStockEmpty(productArray);
 
+			if (this.isAdmin) {
+				
 			document.getElementById( this.id + 'NewProductButton').addEventListener('click', event => this.innerController.onNewProductButtonClick(event) );
 			document.getElementById( this.id + 'EditProductButton').addEventListener('click', event => this.innerController.onEditProductButtonClick(event) );
 			document.getElementById( this.id + 'DeleteProductButton').addEventListener('click', event => this.innerController.onDeleteProductButtonClick(event) );
@@ -215,7 +229,8 @@ class ProductView {
 			document.getElementById( this.id + 'submitNewProductForm').addEventListener('click', event => this.innerController.onNewProductConfirmButtonClick(event) );
 			document.getElementById( this.id + 'submitEditProductForm').addEventListener('click', event => this.innerController.onEditProductConfirmButtonClick(event) );
 			document.getElementById( this.id + 'submitDeleteProductForm').addEventListener('click', event => this.innerController.onDeleteProductConfirmButtonClick(event) );
-	
+			}
+			
 			/**********************************************************************************************************************/
 		});
 	}

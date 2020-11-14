@@ -1,0 +1,7 @@
+Corregir el Error de que sigue añadiendo al carro aunque la cantidad que hayas añadido deje el stock en 0
+
+
+lograr hacer la Purchase Order, intentar lo de ayer pero agregar el Extends Event a la clase que corresponda
+
+
+Añadir Estilos.

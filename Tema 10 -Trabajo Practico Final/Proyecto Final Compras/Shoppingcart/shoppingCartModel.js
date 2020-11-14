@@ -12,14 +12,15 @@ class ShoppingCartModel extends EventTarget {
 
 		super();
 		this.innerData = new Array();
-		this.stockAvailable = new Array();
 	};
 
 	addProductToCart(productData) {
 		
 		if (!this.isProductAlredyinCart(productData)) {
-			this.innerData.push(productData);
+
+			this.innerData.push(productData);	
 		}	
+
 		this.dispatchEvent(new CustomEvent("change"));
 	}
 
@@ -30,18 +31,18 @@ class ShoppingCartModel extends EventTarget {
 			let index = this.innerData.findIndex(product => product.id === productData.id);
 
 			if (index >= 0) {
-				this.innerData[index].quantity = Number(this.innerData[index].quantity) + Number(productData.quantity) ;
+				this.innerData[index].quantity = Number(this.innerData[index].quantity) + Number(productData.quantity);
 				return true;
 			}
 			return false;
 		} 				
 	}
 
-	edit(data) {
+	editStock(data) {
 
 		let message =
 		{
-			action:'edit',
+			action:'editStock',
 			body: data
 		};
 
@@ -62,6 +63,7 @@ class ShoppingCartModel extends EventTarget {
 
 		this.innerData = [];
 		this.stockAvailable = [];
+
 	}
 
 	buyProductsInCart() {
@@ -70,16 +72,15 @@ class ShoppingCartModel extends EventTarget {
 
 		for (let products of this.innerData) {
 			
-			let stockAvailable = this.getStock(products.id);
 			data = {
 				id : products.id,
 				name : products.name,
 				category : products.category ,
 				price : products.price,
-				quantity :  Number(stockAvailable) - Number(products.quantity),
-				description : products.description,
+				quantity : products.quantity,
+				description : products.description
 			}	
-			this.edit(data);
+			this.editStock(data);
 		}
 
 		this.cleanCart();
@@ -92,12 +93,6 @@ class ShoppingCartModel extends EventTarget {
 		return this.innerData;
 	}
 
-	getStock(productId) {
-	
-		let index = this.innerData.findIndex(product => product.id === productId);
-
-		return this.stockAvailable[index].stockAvailable;
-	}
 };
 
 

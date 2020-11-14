@@ -5,14 +5,14 @@
 	$connection = null;
 	
 	//Ejecutando la conexión en un bloque protegido. En caso de falla X al conectar, se atrapa la excepción
-	try
-	{
+	try {
+
 		$connection = new PDO('mysql:host=127.0.0.1:3306;dbname=product-app', 'root', 'Faespo1493' );
 		
 		$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
-	catch (PDOException $connectionException) 
-	{
+	catch (PDOException $connectionException) {
+
 		$status = array( status=>'error', description=>$connectionException->getMessage() );
 	    echo json_encode($status);
 
@@ -30,45 +30,60 @@
 
 	/******** CODIGO NUEVO **********/
 
-	function login( $connection, $data )
-	{
+	function login( $connection, $data ) {
+
 		$SQLCode = "SELECT password FROM user WHERE username = '$data->username'";
 		
 		$db_password = $connection->query($SQLCode)->fetch()['password'];
 		
 
-		if ( $db_password == $data->password )
-		{
+		if ( $db_password == $data->password ) {
+
 			$oldKey = $_SESSION["userKeyAccess"];
 			$_SESSION["userKeyAccess"] = uniqid();
 			return $_SESSION["userKeyAccess"];
 		}
-		else
-		{
+		else {
+
 			return null;
 		}
 	}
 
-	function authorize( $lastUserAccessKey, $connection, $action, $data )
-	{
-		if ( $action != 'login' )
-		{
-			if ( $_SESSION["userKeyAccess"] == $lastUserAccessKey )
-			{
+	function authorize( $lastUserAccessKey, $connection, $action, $data ) {
+
+		if ( $action != 'login' ) {
+
+			if ( $_SESSION["userKeyAccess"] == $lastUserAccessKey ) {
+
 				$response = $action( $connection, $data );
 				$_SESSION["userKeyAccess"] = uniqid();
 				return [ "key" => $_SESSION["userKeyAccess"], "body" => $response ];
 			}
 		}
-		else
-		{
-			return [ "key" => login($connection,$data), "body" => null ];
+		else {
+
+			$SQLCode = "SELECT admin FROM user WHERE username = '$data->username'";
+
+			$db_admin = $connection->query($SQLCode)->fetch()['admin'];
+
+			if ( $db_admin == 1) {
+
+				return [ "key" => login($connection,$data), "body" => "isAdmin" ];
+			}
+			else {
+
+				return [ "key" => login($connection,$data), "body" => "isNotAdmin" ];
+
+			}
+			
 		}		
 	}
 
-	function register( $connection, $data )
-	{
-		return 'RegisterOK!';
+	function register( $connection, $data ) {
+	
+		$SQLCode = "INSERT INTO user(username,password) VALUES('$data->username','$data->password' )";
+		$connection->query($SQLCode);
+	
 	}
 
 
@@ -86,6 +101,7 @@
 	Como esto está generalizando la invocación de cualquier función, es peligroso
 	dado que no todas las funciones tienen la misma cantidad de parámetros y no todas tienen
 	datos de retorno. Por cuestión de simplificación se aborda así.*/
+	
 	
 	echo json_encode( authorize($key, $connection, $action, $data) );
 ?>

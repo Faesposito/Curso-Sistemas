@@ -59,7 +59,6 @@ class ProductRemoteModel extends EventTarget {
 
 		let success = true;
 
-		console.log(productData);
 		success = ( success && productData.hasOwnProperty('name') && productData.name != null && productData.name != '');
 		success = ( success && productData.hasOwnProperty('category') && productData.category != null && productData.category != '' );
 		success = ( success && productData.hasOwnProperty('price') && productData.price != null && productData.price > 0);

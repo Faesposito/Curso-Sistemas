@@ -27,7 +27,8 @@ class ApplicationView {
 		this.innerController = new ApplicationController(model, this);
 		
 		this.shoppingCartController = '';
-		
+
+		this.isAdmin = false;
 		//this.navbarButtonArray = new Array();
 
 		this.show();		
@@ -42,13 +43,32 @@ class ApplicationView {
 		document.getElementById("footer").innerHTML = '';
 	}
 
+	buyButtonRefresh() {
+		
+		this.sidebar();
+		this.body();
+	}
+
 	normal() {
 
+		this.isAdmin = false;
+
 		this.clear();
-		//this.navbar();
+		this.navbar();
 		this.sidebar();
 		this.body();	
-		//this.footer();
+		this.footer();
+	}
+
+	admin() {
+
+		this.isAdmin = true;
+
+		this.clear();
+		this.navbar();
+		this.sidebar();
+		this.body();	
+		this.footer();
 	}
 
 	login() {
@@ -58,15 +78,15 @@ class ApplicationView {
 		let loginModel = new LoginModel();
 		let loginView = new LoginView('login',loginModel);
 		loginView.show();
-		loginView.addEventListener('login', event => this.innerController.onlogin() );
+		loginView.addEventListener('login', event => this.innerController.onLogin(event) );
+		loginView.addEventListener('adminLogin', event => this.innerController.onAdminLogin(event) );
 	}
 
 	product() {
 
 		let productModel = new ProductRemoteModel();
-		let productView = new ProductView('body', productModel);
-
-		productView.update();
+		let productView = new ProductView('body', productModel, this.isAdmin);
+		
 	}
 
 	shoppingCart() {
@@ -76,8 +96,7 @@ class ApplicationView {
 
 		this.shoppingCartController = new ShoppingCartController(shoppingCartModel, shoppingCartView);
 
-		shoppingCartView.showCart();
-
+		shoppingCartView.addEventListener('buyProductsClick', event => this.innerController.buyProductsClick(event) );
 	}
 
 	navbar() {
@@ -101,13 +120,11 @@ class ApplicationView {
 	show() {
 		
 		//this.login();
-		this.normal();
+		this.admin();
 
 		document.getElementById(this.id).addEventListener('click', event =>
 			{
-				if (event.target.classList.contains("addToCart")) this.shoppingCartController.onAddToCartButtonClick(event);
-				// solucion momentanea... 
-				if (event.target.classList.contains("buyButton")) this.normal();
+				if (event.target.classList.contains("addToCart")) this.shoppingCartController.onAddToCartButtonClick(event); 
 			});
 	}
 	

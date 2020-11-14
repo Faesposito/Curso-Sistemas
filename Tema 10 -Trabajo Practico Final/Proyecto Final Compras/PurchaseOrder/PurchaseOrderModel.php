@@ -26,90 +26,37 @@
 
 	function create( $connection, $data ) {
 
-		if ( isValidProductData( $data )) {
+	$SQLCode = "INSERT INTO purchase_order (name,category,price,quantity,description) VALUES('$data->name','$data->category','$data->price','$data->quantity','$data->description' )";
+	$connection->query($SQLCode);
 
-			try {
-
-				$SQLCode = "INSERT INTO product(name,category,price,quantity,description) VALUES('$data->name','$data->category','$data->price','$data->quantity','$data->description' )";
-				$connection->query($SQLCode);
-			}
-			catch( PDOException $connectionException ) {
-
-				return array( status=>'error', description=>$connectionException->getMessage() );
-			}
-		}
-		else {
-
-			return array( status=>'error', description=>'Los datos del usuario no cumplen con la especificación requerida.' );
-		}
 	} 
 
 	function edit( $connection, $data ) {
 
-		$SQLCode = "UPDATE product
+		$SQLCode = "UPDATE purchase_order
 					SET name='$data->name', category='$data->category',	price='$data->price', quantity='$data->quantity',description='$data->description'
-					WHERE id='$data->id'";
-		$connection->query($SQLCode);
-	};
-
-	function editStock( $connection, $data ) {
-
-		$SQLCode = "UPDATE product
-					SET quantity= quantity - '$data->quantity'
 					WHERE id='$data->id'";
 		$connection->query($SQLCode);
 	};
 
 	function delete( $connection, $data ) {
 
-		$SQLCode = "DELETE FROM product WHERE name='$data->name'";
+		$SQLCode = "DELETE FROM purchase_order WHERE name='$data->name'";
 
 		$connection->query($SQLCode);
 	};
 	
 	function getAll($connection) {
 
-		$SQLCode = "SELECT * FROM product ORDER BY name ASC LIMIT 1000";
+		$SQLCode = "SELECT * FROM purchase_order ORDER BY name ASC LIMIT 1000";
 
 		$result = $connection->query($SQLCode)->fetchAll();
 
 		return $result;
 	};
 
-	function isValidProductData( $productData ) {
-
-		$success = true;
-
-		$success = ( $success && array_key_exists('name', $productData ) && !is_null( $productData->name ) );
-		$success = ( $success && array_key_exists('category', $productData ) && !is_null( $productData->category ) );
-		$success = ( $success && array_key_exists('price', $productData ) && !is_null( $productData->price ) );
-		$success = ( $success && array_key_exists('quantity', $productData ) && !is_null( $productData->quantity ) );
-		$success = ( $success && array_key_exists('description', $productData ) && !is_null( $productData->description ) );
-
-		return success;	
-	};
-
+	
 	/* 
- 
-	function getByProductName( $connection, $data ) {
-
-		$SQLCode = "SELECT * FROM product WHERE name='$data->name'";
-
-		$result = $connection->query($SQLCode)->fetchAll();
-
-		return $result;
-	}; 
-
-	function isProductAlredyCreated( $connection, $data ) {
-
-		$SQLCode = "SELECT * FROM product WHERE name='$data->name'";
-
-		$result = $connection->query($SQLCode)->fetchAll();
-
-		return $result;
-	};
-
-
 	La siguiente línea tiene mucho significado:
 	"Ejecuta la función correspondiente al nombre de acción enviado por el cliente, le suministra
 	el argumento basado en el cuerpo del mensaje recibido en la petición, y a la respuesta la codifica

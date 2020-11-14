@@ -5,8 +5,6 @@
 
 */
 
-import {LoginModel} from './LoginModel.js';
-
 class LoginViewController
 {
 	constructor( model, view )
@@ -25,9 +23,15 @@ class LoginViewController
 		{
 			this.accessKey = response.key;
 			window.alert( 'NextAccessKey:'+this.accessKey+' Response:'+ response.body );
-			this.innerView.dispatchEvent( new CustomEvent('login', { 'detail': this.accessKey }) );
-		});
+			if(response.body === 'isAdmin') {
 
+				this.innerView.dispatchEvent( new CustomEvent('adminLogin', { 'detail': response.id }) );	
+			}
+			else {
+	
+				this.innerView.dispatchEvent( new CustomEvent('login', { 'detail': response.id }) );
+			}			
+		});
 		//cortar la propagación del evento.
 		event.preventDefault();
 	}

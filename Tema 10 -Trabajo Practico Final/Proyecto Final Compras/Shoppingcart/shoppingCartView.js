@@ -7,16 +7,19 @@
 
 import { ShoppingCartController } from "./shoppingCartController.js"
 
-class ShoppingCartView {
+class ShoppingCartView extends EventTarget {
 
   constructor(id, model) {
 
+    super();
+    
     this.id = id
     this.innerModel = model;
 
     this.innerController = new ShoppingCartController(model, this);
 
     this.showCart();
+    
   }
 
   showCart() {

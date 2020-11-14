@@ -15,9 +15,19 @@ class ApplicationController
 		this.innerModel = model;
 	}
 
-	onlogin()
-	{
+	onLogin() {
+
 		this.innerView.normal();
+	}
+
+	onAdminLogin() {
+		
+		this.innerView.admin();
+	}
+
+	buyProductsClick() {
+
+		this.innerView.buyButtonRefresh();
 	}
 }
 

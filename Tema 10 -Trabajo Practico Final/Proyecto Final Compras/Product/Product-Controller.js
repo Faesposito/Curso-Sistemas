@@ -13,11 +13,12 @@ class ProductController {
 		this.innerModel = model;
 	}
 
-	/* onBuyProductButtonClick() {
+	upload(imageData){
 
-		this.innerView.update();
-
-	} */
+		let xmlRequest = new XMLHttpRequest();
+		xmlRequest.open("POST", "./Product/upload.php", true);
+		xmlRequest.send(imageData);
+	}
 
 	oncloseProductModalButtonClick() {
 
@@ -28,8 +29,7 @@ class ProductController {
 
 	onNewProductButtonClick() {
 
-		let openModal = 'newProductModal';
-		this.innerView.openProductModal(openModal);
+		this.innerView.openProductModal('newProductModal');
 	}
 
 	onNewProductConfirmButtonClick() {
@@ -67,9 +67,11 @@ class ProductController {
 
 			if ( success ) {
 
-				this.innerModel.create( formProductData )
-				.then( response => response.json() )
-				.then( response => {if ( response != null && response.hasOwnProperty('status') ) window.alert("ServerError: " + response.description )} )
+				this.innerModel.create( formProductData ) // Ejecuta el metodo Create del RemoteModel y devuelve una Promesa de la respuesta del Server
+				.then( response => response.json() ) // decodifica la respuesta del Json y lo convierte en un Objeto de Javascript
+				.then( response => {if ( response != null && response.hasOwnProperty('status') ) window.alert("ServerError: " + response.description )} )/*
+				chequea que la respuesta no tengo null o la propiedad status que es agregada en caso de error
+				*/
 				.then( () => this.innerView.update() );
 			}		
 		});
@@ -79,21 +81,13 @@ class ProductController {
 		
 	}
 
-	upload(input){
-
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "./Product/upload.php", true);
-		xhr.send(input);
-	}
-
 	/********************* End of New Product Events *****************************/
 
 	/********************* Start of Edit Product Events **************************/
 
 	onEditProductButtonClick() {
 
-		let openModal = 'editProductModal';
-		this.innerView.openProductModal(openModal);
+		this.innerView.openProductModal('editProductModal');
 	}
 
 	onEditProductConfirmButtonClick() {
@@ -107,6 +101,8 @@ class ProductController {
 
 		let formViewData = new FormData( document.getElementById("editProductForm") );
 		
+		this.upload(new FormData( document.getElementById("editProductImageForm")));
+
 		let productEditedData = {
 				id : 0,
 				name: formViewData.get('name'),
@@ -155,12 +151,10 @@ class ProductController {
 	}
 	/********************** End of Edit Product Events ***************************/
 
-
 	/******************** Start of Delete Product Events *************************/
 	onDeleteProductButtonClick() {
 
-		let openModal = 'deleteProductModal';
-		this.innerView.openProductModal(openModal);
+		this.innerView.openProductModal('deleteProductModal');
 	}
 
 	onDeleteProductConfirmButtonClick() {
@@ -171,7 +165,6 @@ class ProductController {
 		this.innerModel.delete(formProductData).then( response => this.innerView.update() );
 		
 		this.innerView.closeProductModal();
-
 	}
 
 	/********************* End of Delete Product Events **************************/

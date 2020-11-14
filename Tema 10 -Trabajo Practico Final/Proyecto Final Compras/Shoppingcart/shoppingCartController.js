@@ -13,18 +13,11 @@ class ShoppingCartController {
 		this.innerView = view;
 		this.innerModel = model;
 
-		this.innerModel.addEventListener('change', event => this.innerView.showCart());
-		this.innerView.showCart();
 	}
 
 	onAddToCartButtonClick()
 	{
 		let id = event.srcElement.id.slice(15);
-
-		let cartProductStock = {
-			id : document.getElementById('product-id' + id).innerHTML ,
-			stockAvailable : document.getElementById('product-quantity' + id).getAttribute('max')
-		}
 
 		let cartProductData = {
 			id : document.getElementById('product-id' + id).innerHTML ,
@@ -34,8 +27,8 @@ class ShoppingCartController {
 			quantity : document.getElementById('product-quantity' + id).value,
 			description : document.getElementById('product-description' + id).innerHTML,
 		}
-		this.innerModel.stockAvailable.push(cartProductStock);
-		this.innerModel.addProductToCart(cartProductData, cartProductStock);
+		this.innerModel.addProductToCart(cartProductData);
+		this.innerView.showCart();
 	}
 
 	onDeleteFromCartButtonClick()
@@ -43,13 +36,13 @@ class ShoppingCartController {
 		let id = event.srcElement.id.slice(21);
 		let productToDeleteName = document.getElementById('productInCartName' + id).innerHTML;
 		this.innerModel.deleteProductFromCart(productToDeleteName);
+		this.innerView.showCart();
 	}
 
 	onBuyProductButtonClick() {
 
-		this.innerModel.buyProductsInCart();
-		this.innerView.showCart();
-
+		this.innerModel.buyProductsInCart();			
+		this.innerView.dispatchEvent( new CustomEvent('buyProductsClick') );	
 	}
 }
 
