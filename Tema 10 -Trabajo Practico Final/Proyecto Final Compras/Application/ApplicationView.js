@@ -93,7 +93,6 @@ class ApplicationView {
 		
 		let shoppingCartModel = new ShoppingCartModel();
 		let shoppingCartView = new ShoppingCartView('sidebar', shoppingCartModel);
-
 		this.shoppingCartController = new ShoppingCartController(shoppingCartModel, shoppingCartView);
 
 		shoppingCartView.addEventListener('buyProductsClick', event => this.innerController.buyProductsClick(event) );

@@ -4,14 +4,17 @@
 	Autor: Matías Gastón Santiago
 	https://educacion.batan.coop/course/view.php?id=9
 */
+import { PurchaseOrder } from "../PurchaseOrder/PurchaseOrder.js"
 
-class ShoppingCartModel extends EventTarget {
+
+class ShoppingCartModel {
 
 
 	constructor() {
 
-		super();
 		this.innerData = new Array();
+		this.purchaseOrder = new PurchaseOrder();
+		
 	};
 
 	addProductToCart(productData) {
@@ -20,8 +23,6 @@ class ShoppingCartModel extends EventTarget {
 
 			this.innerData.push(productData);	
 		}	
-
-		this.dispatchEvent(new CustomEvent("change"));
 	}
 
 	isProductAlredyinCart(productData) {
@@ -55,7 +56,6 @@ class ShoppingCartModel extends EventTarget {
 
 		if (index >= 0) {
 			this.innerData.splice(index, 1);
-			this.dispatchEvent(new CustomEvent("change"));
 		}
 	};
 
@@ -70,6 +70,8 @@ class ShoppingCartModel extends EventTarget {
 		
 		let data = {};
 
+		this.purchaseOrder.generatePurchaseOrder(this.innerData);
+
 		for (let products of this.innerData) {
 			
 			data = {
@@ -82,9 +84,7 @@ class ShoppingCartModel extends EventTarget {
 			}	
 			this.editStock(data);
 		}
-
 		this.cleanCart();
-		this.dispatchEvent(new CustomEvent("change"));
 	}; 
 
 	

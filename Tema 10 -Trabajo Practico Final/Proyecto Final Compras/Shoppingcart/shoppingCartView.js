@@ -25,8 +25,8 @@ class ShoppingCartView extends EventTarget {
   showCart() {
 
     let innerHTML = 
-    `<div id= "ShoppingCart" class="Containner">
-      <div id="TabbleContainerID" class="TabbleContainer">
+    `<div id= "ShoppingCart" class="">
+      <div id="" class="">
         <table>
           <tr>
             <th>Name</th>
@@ -70,10 +70,10 @@ class ShoppingCartView extends EventTarget {
 
     innerHTML += `     
     </table>
-        <div class="product-cart">
+        <div class="">
         <h1>${totalPrice} </h1>
         <h6>${productCounter} </h1>
-        <button id="buyButton" class="buyButton" type="submit">Comprar</button>
+        <button id="buyButton" class="" type="submit">Comprar</button>
         </div>
       </div>
     </div>`;

@@ -5,32 +5,33 @@
 	https://educacion.batan.coop/course/view.php?id=9
 */
 
-import { PurchaseOrderController } from "./PurchaseOrderController.js"
-
-class PurchaseOrderView {
+class PurchaseOrder extends EventTarget {
 
   constructor() {
 
-    //this.innerController = new PurchaseOrderController(model, this);
-
+    super();
     this.innerData = new Array();
+  }
 
+  generatePurchaseOrder(productData) {   
+
+		for (let product of productData) {
+
+     this.innerData.push(product);
+    }
+ 
     this.showPurchaseOrder();
   }
-
-  addProducts(data) {
-
-    this.innerData.push(data);
-  }
+ 
   showPurchaseOrder() {
 
     let innerHTML = 
-    `<div id= "PurchaseOrder" class="Containner">
-      <div id="TabbleContainerID" class="TabbleContainer">
-      <h1> Nombre de la Compania </h1>
-      <h1> Direccion de la Compania</h1>
-      <h1> Fecha de la Compra</h1>
-      <h1> Usuario que Realizo la Compra</h1>
+    `<div id="PurchaseOrder" class="">
+      <div id="" class="">
+      <h5> Nombre de la Compania </h5>
+      <h5> Direccion de la Compania</h5>
+      <h5> Fecha de la Compra</h5>
+      <h5> Usuario que Realizo la Compra</h5>
         <table>
           <tr>
             <th>Name</th>
@@ -40,36 +41,33 @@ class PurchaseOrderView {
           </tr>
          `;
 
-    //let productOrderArray = this.innerModel.getAll();
+    let productOrderArray = this.innerData;
     
     let totalPrice = 0; 
     let iva = 0.24;
     let taxes = 0;
 
-    if (this.innerData.length > 0) {
+    if (productOrderArray.length > 0) {
 
-      for (let product of this.innerData) {
+      for (let product of productOrderArray) {
 
         innerHTML +=
           `<tr>
-            <td><p id="productInCartName${this.innerData.indexOf(product)}">${product.name}</p></td>
+            <td><p id="productInCartName${productOrderArray.indexOf(product)}">${product.name}</p></td>
             <td>${product.category}</td>
             <td>${product.price}</td>
             <td>${product.quantity}</td>
           <tr>`;
         totalPrice += Number(product.price)*Number(product.quantity);
-        productCounter++;
-        iva = totalPrice * iva;
       }
-
     }
     innerHTML += `     
     </table>
-        <div class="product-cart">
+        <div class="">
         <h3>SubTotal:   ${totalPrice} </h3>
         </br>
         </br>
-        <h3>IVA:        ${iva}</h3>
+        <h3>IVA:        ${iva = totalPrice * iva}</h3>
         <h3>Impuestos:  ${taxes}</h3>
         </br>
         </br>
@@ -77,13 +75,10 @@ class PurchaseOrderView {
         </div>
       </div>
     </div>`;
-          
-        
+                
     document.getElementById('footer').innerHTML = innerHTML;
-
-    console.log(this.innerData);
   }
 
 }
 
-export { PurchaseOrderView };
+export { PurchaseOrder };

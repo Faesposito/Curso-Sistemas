@@ -5,14 +5,12 @@
 	https://educacion.batan.coop/course/view.php?id=9
 */
 
-
 class ShoppingCartController {
 
 	constructor(model, view ) {
 
 		this.innerView = view;
 		this.innerModel = model;
-
 	}
 
 	onAddToCartButtonClick()
