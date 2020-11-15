@@ -102,14 +102,14 @@ class ApplicationView {
 
 	}
 
-	sidebar() {
-
-		this.shoppingCart();
-	}
-
 	body() {
 
 		this.product();
+	}
+
+	sidebar() {
+
+		this.shoppingCart();
 	}
 
 	footer() {

@@ -13,8 +13,8 @@ class ShoppingCartController {
 		this.innerModel = model;
 	}
 
-	onAddToCartButtonClick()
-	{
+	onAddToCartButtonClick() {
+
 		let id = event.srcElement.id.slice(15);
 
 		let cartProductData = {
@@ -23,10 +23,10 @@ class ShoppingCartController {
 			category : document.getElementById('product-category' + id).innerHTML ,
 			price : document.getElementById('product-price' + id).innerHTML,
 			quantity : document.getElementById('product-quantity' + id).value,
-			description : document.getElementById('product-description' + id).innerHTML,
+			description : document.getElementById('product-description' + id).innerHTML
 		}
 		this.innerModel.addProductToCart(cartProductData);
-		this.innerView.showCart();
+		this.innerView.showCart();		
 	}
 
 	onDeleteFromCartButtonClick()

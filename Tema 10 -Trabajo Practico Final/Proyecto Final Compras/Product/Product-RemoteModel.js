@@ -68,16 +68,17 @@ class ProductRemoteModel extends EventTarget {
 		return success;
 	};
 
-	/* getByProductId( productDataName ) {
+	getByProductId( productId ) {
 
 		let message = {
 
 			action:'getByProductId',
-			body: productDataName
+			body: productId
 		};
 
-		return fetch( './Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	}; 
+	/* 
 
 	isProductAlredyCreated( productDataName ) {
 

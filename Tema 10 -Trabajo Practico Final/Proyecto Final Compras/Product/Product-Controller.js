@@ -166,8 +166,35 @@ class ProductController {
 		
 		this.innerView.closeProductModal();
 	}
-
 	/********************* End of Delete Product Events **************************/
+
+	onAddToCartClick() {
+
+		let productIndex = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.id.slice(12);
+		let productValue = document.getElementById('product-quantity' + productIndex).value;
+		let productMax = document.getElementById('product-quantity' + productIndex).max;
+
+		console.log(productValue);
+		let html = `<input type="number" id="product-quantity${productIndex}" name="quantity" min="0" max="${productMax - productValue}" value="1">`
+
+		document.getElementById('product-quantity-div' + productIndex).innerHTML = html;
+
+		productMax = document.getElementById('product-quantity' + productIndex).max;
+
+		console.log(productMax);
+		if(productMax === '0') {
+
+			html = `<button id="AddToCartButton${productIndex}" class="addToCart" type="submit" disabled>Out of Stock</button>`
+			document.getElementById('product-cart' + productIndex).innerHTML = html;
+		}
+
+	}
+
+	onDeleteFromCartClick() {
+
+		this.innerView.update()
+
+	}
 }
 
 export { ProductController };

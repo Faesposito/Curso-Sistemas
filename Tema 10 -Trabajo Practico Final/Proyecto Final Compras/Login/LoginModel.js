@@ -39,7 +39,7 @@ class LoginModel extends EventTarget
 			body: userData
 		};
 
-		return fetch( './Login/LoginModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './Login/LoginModel.php', { method:'POST', body:JSON.stringify(message) } ); 
 	}
 
 	

@@ -89,16 +89,17 @@
 		return success;	
 	};
 
-	/* 
- 
-	function getByProductName( $connection, $data ) {
+	function getByProductId( $connection, $data ) {
 
-		$SQLCode = "SELECT * FROM product WHERE name='$data->name'";
+		$SQLCode = "SELECT * FROM product WHERE id='$data'";
 
 		$result = $connection->query($SQLCode)->fetchAll();
 
 		return $result;
-	}; 
+	}
+	/* 
+ 
+	; 
 
 	function isProductAlredyCreated( $connection, $data ) {
 
