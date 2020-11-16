@@ -1,0 +1,343 @@
+
+*
+{
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+.product-card {
+    width: 300px;
+    position: relative;
+    box-shadow: 0 2px 7px #dfdfdf;
+    margin: 50px auto;
+    background: #fafafa;
+}
+
+.badge {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    background: red;
+    color: #fff;
+    padding: 3px 10px;
+}
+
+.product-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding: 50px;
+    background: #f0f0f0;
+}
+
+.product-img img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.product-details {
+    padding: 30px;
+}
+
+.product-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 18px;
+}
+
+.product-details h3 a {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.product-details h3 a:hover {
+    color: #fbb72c;
+}
+
+.product-details p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #999;
+}
+
+.product-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.product-bottom-details div {
+    float: left;
+    width: 50%;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #1e74c5;
+    font-weight: 600;
+}
+
+.product-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.product-quantity input{
+    width: 50%;
+}
+
+.product-links {
+    text-align: right;
+}
+
+.product-links a {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.product-links a:hover {
+    color: #fbb72c;
+}
+
+/*********** Containner Styles ***********/
+
+
+
+.Containner {
+
+	position: relative;
+	width: clamp(30%, 35%, 40%);
+	height: clamp(50vh, 60vh, 70vh);
+	margin: 0 auto;
+	background-color: white;
+
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-gap: 20px;
+}
+
+.ButtonContainner button {
+
+	width: clamp(30%, 40%, 45%);
+	outline: none;
+	display: grid;
+	position: absolute;
+	margin: auto;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	text-align: center;
+	letter-spacing: 1px;
+	color: black;
+	
+
+}
+
+.TabbleContainer table {
+
+	width: 100%;
+	height: auto;
+	border-top: 0.5px solid lightgrey;
+
+}
+
+.TabbleContainer table,
+tr,
+td,
+th {
+
+	border-bottom: 1px solid rgb(150, 149, 149, 0.7);
+	border-collapse: collapse;
+	background-color: rgb(247, 244, 244);
+	color: black;
+	line-height: 3rem;
+
+}
+
+.TabbleContainer th {
+
+
+	background-color: rgb(207, 206, 233);
+	line-height: 4rem;
+
+	font-size: 1.2rem;
+	font-weight: bolder;
+	text-shadow: 0px 5px 4px rgba(92, 119, 129, 0.78);
+
+}
+
+
+/******** End of Containner Styles *******/
+
+
+
+
+/*********** Buttons Styles *********/
+
+button {
+
+	border-radius: 5px;
+	box-shadow: 0px 12px 14px -4px rgba(0, 0, 0, 0.75);
+}
+
+.newProduct,
+.editProduct {
+	background: #30A54A;
+	font-size: 2rem;
+	border: 1px solid rgb(146, 66, 66);
+}
+
+.deleteProduct {
+	
+	background: #ED1C24;
+	font-size: 2rem;
+	color: white;
+}
+
+button:hover {
+	transform: scale(1.1, 1.1);
+	filter: brightness(110%);
+}
+
+button:active {
+	filter: brightness(85%) saturate(100%);
+}
+
+
+/******** End of Buttons Styles *******/
+
+
+
+
+/************* Form Css ***************/
+
+
+
+.deleteProductModalContainner,
+.newProductModalContainner,
+.editProductModalContainner {
+
+	display: none;
+	z-index: 100;
+	min-width: 30%;
+	min-height: 45%;
+	position: fixed;
+	top: 50%;
+	left: 42%;
+
+}
+
+.deleteProductModalContainner {
+
+	margin-top: -13%;
+	margin-left: -15%;
+}
+
+.newProductModalContainner {
+
+	margin-top: -13%;
+	margin-left: -18%;
+
+}
+
+.editProductModalContainner {
+
+	margin-top: -13%;
+	margin-left: -15%;
+}
+
+.UserModal h1 {
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.ModalForm {
+	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 30px 20px;
+	background-color: white;
+	text-align: center;
+	border-radius: 5px;
+}
+
+[type=text],
+[type=password] {
+	display: block;
+	margin: 0 auto;
+	width: 80%;
+	border: 0;
+	border-bottom: 2px solid rgba(0, 0, 0, .2);
+	height: 45px;
+	line-height: 45px;
+	margin-bottom: 10px;
+	font-size: 1em;
+	color: rgba(0, 0, 0, .4);
+}
+
+[type='text']:focus,
+[type=password]:focus {
+	outline: none;
+	border-color: #237375;
+}
+
+.ModalForm button {
+	margin-top: 25px;
+	width: 80%;
+	border: 0;
+	background-color: #53CACE;
+	border-radius: 5px;
+	height: 50px;
+	color: white;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+.closeModalButton {
+
+    position:absolute;
+    top:10px;
+	right:-30px;
+
+	width: 5%;
+	border: 0;
+	background-color: #e65656;
+	border-radius: 5px;
+
+	color: white;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+/********** End of Form Css ************/

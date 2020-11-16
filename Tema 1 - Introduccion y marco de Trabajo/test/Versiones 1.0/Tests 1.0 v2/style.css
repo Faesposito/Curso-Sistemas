@@ -1,0 +1,251 @@
+body {
+
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	background-color: #1abc9c79;
+
+}
+
+h1 {
+
+	text-align: center;
+	font-size: 4rem;
+	font-weight: bold;
+	color: rgb(55, 54, 56);
+	letter-spacing: 8px;
+	text-transform: uppercase;
+	margin-top: 5%;
+	text-shadow: 0px 5px 4px rgba(92, 119, 129, 0.78);
+}
+
+
+/*********** Containner Styles ***********/
+
+.Containner {
+
+	position: relative;
+	width: clamp(30%, 35%, 40%);
+	height: clamp(50vh, 60vh, 70vh);
+	margin: 0 auto;
+
+	display: flex;
+	flex-flow: column;
+	align-content: center;
+
+	background-color: white;
+
+}
+
+.ButtonContainner button {
+
+	width: clamp(30%, 40%, 45%);
+	outline: none;
+	display: grid;
+	position: absolute;
+	margin: auto;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	text-align: center;
+	letter-spacing: 1px;
+	color: black;
+
+}
+
+.TabbleContainer table {
+
+	width: 100%;
+	height: auto;
+	border-top: 0.5px solid lightgrey;
+
+}
+
+.TabbleContainer table,
+tr,
+td,
+th {
+
+	border-bottom: 1px solid rgb(150, 149, 149, 0.7);
+	border-collapse: collapse;
+	background-color: rgb(247, 244, 244);
+	color: black;
+	line-height: 3rem;
+
+}
+
+.TabbleContainer th {
+
+
+	background-color: rgb(207, 206, 233);
+	line-height: 4rem;
+
+	font-size: 1.2rem;
+	font-weight: bolder;
+	text-shadow: 0px 5px 4px rgba(92, 119, 129, 0.78);
+
+}
+
+
+/******** End of Containner Styles *******/
+
+
+
+
+/*********** Buttons Styles *********/
+
+button {
+	border-radius: 5px;
+	box-shadow: 0px 12px 14px -4px rgba(0, 0, 0, 0.75);
+}
+
+.newProduct {
+	background: #30A54A;
+	font-size: 2rem;
+	border: 1px solid rgb(146, 66, 66);
+}
+
+.editProduct {
+	background: #FDC02E;
+	color: black;
+}
+
+.addToCart {
+	
+	background: #ED1C24;
+	color: white;
+}
+
+.editProduct,
+.addToCart {
+	width: 75%;
+	height: 75%;
+	font-size: 1.2rem;
+	border: none;
+	margin: 0px;
+	text-align: center;
+	justify-items: center;
+}
+
+button:hover {
+	transform: scale(1.1, 1.1);
+	filter: brightness(110%);
+}
+
+button:active {
+	filter: brightness(85%) saturate(100%);
+}
+
+
+/******** End of Buttons Styles *******/
+
+
+
+
+/************* Form Css ***************/
+
+
+
+.deleteProductModalContainner,
+.newProductModalContainner,
+.editProductModalContainner {
+
+	display: none;
+	z-index: 100;
+	min-width: 30%;
+	min-height: 45%;
+	position: fixed;
+	top: 50%;
+	left: 42%;
+
+}
+
+.deleteProductModalContainner {
+
+	margin-top: -13%;
+	margin-left: -15%;
+}
+
+.newProductModalContainner {
+
+	margin-top: -13%;
+	margin-left: -18%;
+
+}
+
+.editProductModalContainner {
+
+	margin-top: -13%;
+	margin-left: -15%;
+}
+
+.UserModal h1 {
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.ModalForm {
+	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 30px 20px;
+	background-color: white;
+	text-align: center;
+	border-radius: 5px;
+}
+
+[type=text],
+[type=password] {
+	display: block;
+	margin: 0 auto;
+	width: 80%;
+	border: 0;
+	border-bottom: 2px solid rgba(0, 0, 0, .2);
+	height: 45px;
+	line-height: 45px;
+	margin-bottom: 10px;
+	font-size: 1em;
+	color: rgba(0, 0, 0, .4);
+}
+
+[type='text']:focus,
+[type=password]:focus {
+	outline: none;
+	border-color: #237375;
+}
+
+.ModalForm button {
+	margin-top: 25px;
+	width: 80%;
+	border: 0;
+	background-color: #53CACE;
+	border-radius: 5px;
+	height: 50px;
+	color: white;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+.closeModalButton {
+
+    position:absolute;
+    top:10px;
+	right:-30px;
+
+	width: 5%;
+	border: 0;
+	background-color: #e65656;
+	border-radius: 5px;
+
+	color: white;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+/********** End of Form Css ************/
