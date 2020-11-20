@@ -51,13 +51,14 @@
 
 	function authorize( $lastUserAccessKey, $connection, $action, $data ) {
 
-		if ( $action != 'login' ) {
-
+		if ( $action != 'login' ) {	
+			
 			if ( $_SESSION["userKeyAccess"] == $lastUserAccessKey ) {
 
 				$response = $action( $connection, $data );
 				$_SESSION["userKeyAccess"] = uniqid();
 				return [ "key" => $_SESSION["userKeyAccess"], "body" => $response ];
+				
 			}
 		}
 		else {
@@ -81,10 +82,40 @@
 
 	function register( $connection, $data ) {
 	
-		$SQLCode = "INSERT INTO user(username,password) VALUES('$data->username','$data->password' )";
-		$connection->query($SQLCode);
-	
+		if ( isValidUserData( $data )) {
+
+			try {
+
+				$SQLCode = "INSERT INTO user (username,password,firstname,surname,email,age,address) 
+							VALUES('$data->username','$data->password','$data->firstname','$data->surname','$data->email','$data->age','$data->address' )";
+				$connection->query($SQLCode);
+			}
+			catch( PDOException $connectionException ) {
+
+				return array( status=>'error', description=>$connectionException->getMessage() );
+			}
+		}
+		else {
+
+			return array( status=>'error', description=>'Los datos del usuario no cumplen con la especificación requerida.' );
+		}
 	}
+
+	function isValidUserData( $productData ) {
+
+		$success = true;
+
+		$success = ( $success && array_key_exists('username', $productData ) && !is_null( $productData->username ) );
+		$success = ( $success && array_key_exists('password', $productData ) && !is_null( $productData->password ) );
+		$success = ( $success && array_key_exists('confirmPassword', $productData ) && $productData->confirmPassword == $productData->password );
+		$success = ( $success && array_key_exists('firstname', $productData ) && !is_null( $productData->firstname ) );
+		$success = ( $success && array_key_exists('surname', $productData ) && !is_null( $productData->surname ) );
+		$success = ( $success && array_key_exists('email', $productData ) && !is_null( $productData->email ) );
+		$success = ( $success && array_key_exists('age', $productData ) && !is_null( $productData->age ) && $productData->age >= 18);
+		$success = ( $success && array_key_exists('address', $productData ) && !is_null( $productData->address ) );
+
+		return success;	
+	};
 
 
 	/********************************/
@@ -102,6 +133,7 @@
 	dado que no todas las funciones tienen la misma cantidad de parámetros y no todas tienen
 	datos de retorno. Por cuestión de simplificación se aborda así.*/
 	
+	//echo json_encode( $action( $connection, $data ) );
 	
 	echo json_encode( authorize($key, $connection, $action, $data) );
 ?>

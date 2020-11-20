@@ -50,6 +50,8 @@ class ShoppingCartModel {
 		return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
 	};
 
+
+
 	deleteProductFromCart(productDataName) {
 
 		let index = this.innerData.findIndex(product => product.name === productDataName);

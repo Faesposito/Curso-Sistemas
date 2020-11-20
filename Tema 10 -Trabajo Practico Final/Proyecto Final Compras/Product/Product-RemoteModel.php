@@ -97,8 +97,14 @@
 
 		return $result;
 	}
-	/* 
- 
+
+	function purchaseOrder($connection, $data) {
+
+		$jsonData = json_encode($data);
+		$SQLCode = "INSERT INTO purchase_order (product) VALUES('$jsonData' )";
+		$connection->query($SQLCode);
+	}
+	/* 	
 	; 
 
 	function isProductAlredyCreated( $connection, $data ) {

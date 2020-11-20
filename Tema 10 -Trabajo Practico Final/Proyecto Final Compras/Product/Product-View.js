@@ -140,30 +140,22 @@ class ProductView {
                                 <p id="product-description${productArray.indexOf(product)}" class="product-description">${product.description}</p>
                                 <div class="product-bottom-details">
                                     <div id="product-price${productArray.indexOf(product)}" class="product-price">${product.price}</div>
-                                    <div class="product-quantity">
-                                        <div id="product-quantity-div${productArray.indexOf(product)}">
-                                            <input type="number" id="product-quantity${productArray.indexOf(product)}" name="quantity" min="0" max="${product.quantity}" value="1">
-                                        </div>`;
-
-                                        if(product.quantity <= '0') {
-
-                                            innerHTML += `
-                                            <div id="product-cart${productArray.indexOf(product)}" class="product-cart">
-                                                <button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart" type="submit" disabled>Out of Stock</button>
-                                            </div>`;
-                                        }
-                                        else {
-                                            innerHTML +=
-                                            `<div id="product-cart${productArray.indexOf(product)}" class="product-cart">
-                                                <button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart" type="submit">Add to Cart</button>
-                                            </div>`;
-                                    }
+                                    <input type="number" id="product-quantity${productArray.indexOf(product)}" name="quantity" min="0" max="${product.quantity}" value="1">
+                                </div>`;
+                    if(product.quantity === '0') {
+                        innerHTML +=`<div id="product-cart${productArray.indexOf(product)}" class="product-cart">
+                                        <button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart" disabled>Out of Stock</button>
+                                    </div>`;
+                    } 
+                    else {
+                        innerHTML +=`<div id="product-cart${productArray.indexOf(product)}" class="product-cart">
+                                        <button id="AddToCartButton${productArray.indexOf(product)}" class="addToCart">Add to Cart</button>
+                                    </div>`;
+                    }           
                     innerHTML +=`
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>`
+                    </div>`;
                 }
             }
             else {
@@ -212,16 +204,6 @@ class ProductView {
             /***********************************     Event Listeners      ********************************************************/
 
             document.getElementById( this.id ).innerHTML = innerHTML;
-
-            document.getElementById(this.id).addEventListener('click', event => {
-
-                if (event.target.classList.contains("addToCart")) this.innerController.onAddToCartClick(event);     
-            });
-
-            document.getElementById('sidebar').addEventListener('click', event => {
-
-                if (event.target.classList.contains("deleteProductFromCart")) this.innerController.onDeleteFromCartClick(event);     
-            });
 
             if (this.isAdmin) {
 

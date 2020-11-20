@@ -16,6 +16,7 @@ import { ProductRemoteModel } from "../Product/Product-RemoteModel.js"
 import { ShoppingCartView } from "../Shoppingcart/shoppingCartView.js"
 import { ShoppingCartModel } from "../Shoppingcart/shoppingCartModel.js"
 import { ShoppingCartController } from "../Shoppingcart/shoppingCartController.js"
+import { ProductController } from "../Product/Product-Controller.js"
 
 class ApplicationView {
 
@@ -27,6 +28,7 @@ class ApplicationView {
 		this.innerController = new ApplicationController(model, this);
 		
 		this.shoppingCartController = '';
+		this.productController = '';
 
 		this.isAdmin = false;
 		//this.navbarButtonArray = new Array();
@@ -77,7 +79,7 @@ class ApplicationView {
 		
 		let loginModel = new LoginModel();
 		let loginView = new LoginView('login',loginModel);
-		loginView.show();
+		loginView.showLogin();
 		loginView.addEventListener('login', event => this.innerController.onLogin(event) );
 		loginView.addEventListener('adminLogin', event => this.innerController.onAdminLogin(event) );
 	}
@@ -86,7 +88,7 @@ class ApplicationView {
 
 		let productModel = new ProductRemoteModel();
 		let productView = new ProductView('body', productModel, this.isAdmin);
-		
+		this.productController = new ProductController(productModel, productView);
 	}
 
 	shoppingCart() {
@@ -124,6 +126,7 @@ class ApplicationView {
 		document.getElementById(this.id).addEventListener('click', event =>
 			{
 				if (event.target.classList.contains("addToCart")) this.shoppingCartController.onAddToCartButtonClick(event); 
+				if (event.target.classList.contains("deleteProductFromCart")) this.productController.onDeleteFromCartClick(event);  
 			});
 	}
 	

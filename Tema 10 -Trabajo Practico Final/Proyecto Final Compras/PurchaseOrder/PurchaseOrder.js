@@ -13,13 +13,26 @@ class PurchaseOrder extends EventTarget {
     this.innerData = new Array();
   }
 
+  addOrderToDataBase(data) {
+
+    let message = {
+
+			action:'purchaseOrder',
+			body: data
+		};
+
+    return fetch( './Product/Product-RemoteModel.php', { method:'POST', body:JSON.stringify(message) } );
+    
+  }
+
   generatePurchaseOrder(productData) {   
 
 		for (let product of productData) {
 
      this.innerData.push(product);
     }
- 
+    
+    this.addOrderToDataBase(this.innerData);
     this.showPurchaseOrder();
   }
  

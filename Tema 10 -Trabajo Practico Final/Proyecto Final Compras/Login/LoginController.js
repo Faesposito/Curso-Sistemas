@@ -12,7 +12,7 @@ class LoginViewController
 		this.innerView = view;
 		this.innerModel = model;
 
-		this.accessKey = null;
+		//this.accessKey = 'Ajfks8987';
 	}
 
 	onLoginButtonClick(event)
@@ -38,17 +38,39 @@ class LoginViewController
 
 	onRegisterButtonClick(event)
 	{
-		let data = this.innerView.getLoginFormData();
-		
-		this.innerModel.register(this.accessKey,data).then( response => 
-		{
+		this.innerView.showRegister();
+		//event.stopPropagation();
+		event.preventDefault();
+	}
+
+	onRegisterSubmitButtonClick(event) {
+
+		let data = this.innerView.getRegisterFormData();
+
+		let success = true;
+
+		console.log(data);
+
+		if ( !this.innerModel.isValidUserData( data ) ) {
+
+			window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
+			success = false;
+		}
+
+		if ( success ) {
+
+		this.innerModel.register(this.accessKey,data).then( response => {
+
 			this.accessKey = response.key;
 			window.alert( 'NextAccessKey:'+this.accessKey+' Response:'+ response.body );
 		});
+		}
 
 		//cortar la propagación del evento.
-		event.stopPropagation();
+		//event.stopPropagation();
 		event.preventDefault();
+		this.innerView.showLogin();
+
 	}
 
 }

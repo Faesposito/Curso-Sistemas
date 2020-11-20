@@ -41,7 +41,24 @@ class LoginModel extends EventTarget
 
 		return fetch( './Login/LoginModel.php', { method:'POST', body:JSON.stringify(message) } ); 
 	}
+	
+	isValidUserData( userData ) {
 
+		let success = true;
+
+		let passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16})");
+
+		success = ( success && userData.hasOwnProperty('username') && userData.username != null && userData.username != '');
+		success = ( success && userData.hasOwnProperty('password') && userData.password.match(passwordRegex) != null && userData.password != '' );
+		success = ( success && userData.hasOwnProperty('confirmPassword') && userData.confirmPassword === userData.password );
+		success = ( success && userData.hasOwnProperty('firstname') && userData.firstname != null && userData.firstname != '');
+		success = ( success && userData.hasOwnProperty('surname') && userData.surname != null && userData.surname != '');
+		success = ( success && userData.hasOwnProperty('email') && userData.email != null && userData.email != '');
+		success = ( success && userData.hasOwnProperty('age') && userData.age != null && userData.age >= 18);
+		success = ( success && userData.hasOwnProperty('address') && userData.address != null && userData.address != '');
+		
+		return success;
+	};
 	
 };
 
